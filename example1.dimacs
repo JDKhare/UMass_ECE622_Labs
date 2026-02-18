@@ -1,0 +1,21 @@
+p cnf 6 9
+c
+c first line is "p cnf num_variables num_clauses"
+c
+c initial condition is 0 for both state bits
+-5 0
+-6 0
+c
+c here is the transition relation...
+c the AND gate...
+1 -2 0
+5 -2 0
+-1 -5 2 0
+c
+c the INV gate...
+-2 -3 0
+2 3 0
+c
+c the INV gate...
+-4 -6 0
+4 6 0
