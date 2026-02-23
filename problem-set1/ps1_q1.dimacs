@@ -1,0 +1,22 @@
+p cnf 5 9
+c
+c s0  = 1
+c s1  = 2
+c ns0 = 3
+c ns1 = 4
+c a   = 5
+c
+c transition relation
+1 -4 0
+5 -4 0
+-1 -5 4 0
+-5 -3 0
+5 3 0
+c
+c initial state:
+-1 0
+-2 0
+c
+c final state target:
+4 0
+-3 0
