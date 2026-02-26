@@ -1,0 +1,4 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/Labs/Lab 1/srcverilog/stoplight1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module stoplight1
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/Labs/Lab 1/srcverilog/demo.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_stoplight1

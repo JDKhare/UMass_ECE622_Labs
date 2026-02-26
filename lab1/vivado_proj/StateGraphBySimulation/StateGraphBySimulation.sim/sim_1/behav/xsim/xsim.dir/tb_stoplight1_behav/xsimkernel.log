@@ -1,0 +1,7 @@
+Running: xsim.dir/tb_stoplight1_behav/xsimk.exe -simmode gui -wdb tb_stoplight1_behav.wdb -simrunnum 0 -socket 63241
+Design successfully loaded
+Design Loading Memory Usage: 11240 KB (Peak: 11240 KB)
+Design Loading CPU Usage: 30 ms
+Simulation completed
+Simulation Memory Usage: 12096 KB (Peak: 12096 KB)
+Simulation CPU Usage: 77 ms

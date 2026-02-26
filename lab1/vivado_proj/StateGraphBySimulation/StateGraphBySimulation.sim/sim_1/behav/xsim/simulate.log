@@ -1,0 +1,39 @@
+Time resolution is 1 ps
+5000 | Ped=0 | S=0000 -> NS=0001)
+15000 | Ped=0 | S=0001 -> NS=0010)
+
+=== EXPERIMENT: Ped = 0 ===
+25000 | Ped=0 | S=0010 -> NS=0011)
+35000 | Ped=0 | S=0011 -> NS=0100)
+45000 | Ped=0 | S=0100 -> NS=0101)
+55000 | Ped=0 | S=0101 -> NS=0101)
+65000 | Ped=0 | S=0101 -> NS=0101)
+75000 | Ped=0 | S=0101 -> NS=0101)
+85000 | Ped=0 | S=0101 -> NS=0101)
+95000 | Ped=0 | S=0101 -> NS=0101)
+105000 | Ped=0 | S=0101 -> NS=0101)
+115000 | Ped=0 | S=0101 -> NS=0101)
+125000 | Ped=0 | S=0101 -> NS=0101)
+135000 | Ped=0 | S=0101 -> NS=0101)
+
+=== EXPERIMENT: Ped = 1 ===
+145000 | Ped=1 | S=0101 -> NS=1000)
+155000 | Ped=1 | S=1000 -> NS=1001)
+165000 | Ped=1 | S=1001 -> NS=0000)
+175000 | Ped=1 | S=0000 -> NS=0001)
+185000 | Ped=1 | S=0001 -> NS=0010)
+195000 | Ped=1 | S=0010 -> NS=0011)
+205000 | Ped=1 | S=0011 -> NS=0110)
+215000 | Ped=1 | S=0110 -> NS=0111)
+225000 | Ped=1 | S=0111 -> NS=1000)
+235000 | Ped=1 | S=1000 -> NS=1001)
+245000 | Ped=1 | S=1001 -> NS=0000)
+255000 | Ped=1 | S=0000 -> NS=0001)
+265000 | Ped=1 | S=0001 -> NS=0010)
+275000 | Ped=1 | S=0010 -> NS=0011)
+285000 | Ped=1 | S=0011 -> NS=0110)
+295000 | Ped=1 | S=0110 -> NS=0111)
+
+Done. VCD written to stoplight.vcd
+
+$finish called at time : 295 ns : File "C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/Labs/Lab 1/srcverilog/demo.v" Line 124

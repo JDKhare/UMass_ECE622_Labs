@@ -1,0 +1,38 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Thu Feb 26 15:33:00 2026
+# Process ID: 25572
+# Current directory: C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/StateGraphBySimulation
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent20788 C:\Users\khare\Desktop\hey\Post-arrival USA\ECE 622 - Modeling and Verification of Embedded Systems\UMass_ECE622_Labs\lab1\AMD Vivado Project\StateGraphBySimulation\StateGraphBySimulation.xpr
+# Log file: C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/StateGraphBySimulation/vivado.log
+# Journal file: C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/StateGraphBySimulation\vivado.jou
+# Running On        :7art-he
+# Platform          :Windows Server 2016 or Windows 10
+# Operating System  :26200
+# Processor Detail  :AMD Ryzen 7 260 w/ Radeon 780M Graphics
+# CPU Frequency     :3793 MHz
+# CPU Physical cores:8
+# CPU Logical cores :16
+# Host memory       :16438 MB
+# Swap memory       :19327 MB
+# Total Virtual     :35765 MB
+# Available Virtual :12252 MB
+#-----------------------------------------------------------
+start_gui
+open_project {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/StateGraphBySimulation/StateGraphBySimulation.xpr}
+update_compile_order -fileset sources_1
+add_files -scan_for_includes {{C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/verilog_src/ex2.v} {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/verilog_src/ex1.v} {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/verilog_src/ex4.v} {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/verilog_src/ex3.v} {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/verilog_src/ex5.v} {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/verilog_src/demo.v} {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/verilog_src/stoplight2.v} {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/verilog_src/stoplight1.v}}
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files {{C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/stoplight2.v}}] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files {{C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/stoplight1.v}}] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files {{C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/ex5.v}}] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files {{C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/ex4.v}}] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files {{C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/ex3.v}}] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files {{C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/ex2.v}}] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files {{C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/ex1.v}}] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files {{C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/demo.v}}] -no_script -reset -force -quiet
+remove_files  {{C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/stoplight2.v} {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/stoplight1.v} {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/ex5.v} {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/ex4.v} {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/ex3.v} {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/ex2.v} {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/ex1.v} {C:/Users/khare/Desktop/hey/Post-arrival USA/ECE 622 - Modeling and Verification of Embedded Systems/UMass_ECE622_Labs/lab1/AMD Vivado Project/srcverilog/demo.v}}
