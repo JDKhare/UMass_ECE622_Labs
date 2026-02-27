@@ -1,0 +1,58 @@
+=== RUN @ 20260226_204631 ===
+Verilog  : ./verilog_src/ex1.v
+Init     : 11
+Target   : 01
+Unroll k : 2
+
+WARNING: for repeatability, setting FPU to use double precision
+============================[ Problem Statistics ]=============================
+|                                                                             |
+|  Number of variables:            18                                         |
+|  Number of clauses:              30                                         |
+|  Parse time:                   0.00 s                                       |
+|  Eliminated clauses:           0.00 Mb                                      |
+|  Simplification time:          0.00 s                                       |
+|                                                                             |
+============================[ Search Statistics ]==============================
+| Conflicts |          ORIGINAL         |          LEARNT          | Progress |
+|           |    Vars  Clauses Literals |    Limit  Clauses Lit/Cl |          |
+===============================================================================
+===============================================================================
+restarts              : 1
+conflicts             : 0              (0 /sec)
+decisions             : 1              (0.00 % random) (792 /sec)
+propagations          : 11             (8709 /sec)
+conflict literals     : 0              (-nan % deleted)
+Memory used           : 22.00 MB
+CPU time              : 0.001263 s
+
+SATISFIABLE
+
+=== Minisat Status ===
+SAT
+
+=== Full SAT Output ===
+SAT
+1 2 -3 -4 5 -6 -7 -8 -9 -10 -11 -12 -13 -14 15 -16 -17 18 0
+
+=== Node Mapping ===
+1:S1,0
+2:S0,0
+3:clock,0
+4:A,0
+5:X1,0
+6:NS1,0
+7:NS0,0
+8:Y,0
+9:S1,1
+10:S0,1
+11:clock,1
+12:A,1
+13:X1,1
+14:NS1,1
+15:NS0,1
+16:Y,1
+17:S1,2
+18:S0,2
+
+=== END RUN ===
