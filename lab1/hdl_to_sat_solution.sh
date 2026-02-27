@@ -1,4 +1,4 @@
-et -euo pipefail
+set -euo pipefail
 
 # Usage:
 # ./run_sat.sh <verilog> <target> <k> <init> <outdir> <minisat>
@@ -43,10 +43,15 @@ LOGFILE="${LOGDIR}/${BASE}_init${INIT}_target${TARGET}_k${K}_${TS}.txt"
   echo
   echo "=== Full SAT Output ==="
   cat "${OUTDIR}/out.sat"
+  
+STATUS=$(head -n 1 "${OUTDIR}/out.sat")
 
-  echo
+  if [ "$STATUS" = "SAT" ]; then
   echo "=== Node Mapping ==="
   cat "${OUTDIR}/out.nodes"
+  else
+  echo "=== UNSAT: Skipping node mapping ==="
+  fi
 
   echo
   echo "=== END RUN ==="

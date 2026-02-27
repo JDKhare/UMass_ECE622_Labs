@@ -1,0 +1,34 @@
+=== RUN @ 20260226_212315 ===
+Verilog  : ./verilog_src/ex5.v
+Init     : 000000000
+Target   : 000110111
+Unroll k : 15
+Outdir   : logs_reachability
+MiniSat  : minisat
+Flags    : print=false state_only=false summary=false
+
+WARNING: for repeatability, setting FPU to use double precision
+============================[ Problem Statistics ]=============================
+|                                                                             |
+|  Number of variables:          3444                                         |
+|  Number of clauses:            8205                                         |
+|  Parse time:                   0.00 s                                       |
+|  Simplification time:          0.00 s                                       |
+|                                                                             |
+===============================================================================
+Solved by simplification
+restarts              : 0
+conflicts             : 0              (0 /sec)
+decisions             : 0              (-nan % random) (0 /sec)
+propagations          : 245            (63031 /sec)
+conflict literals     : 0              (-nan % deleted)
+Memory used           : 23.00 MB
+CPU time              : 0.003887 s
+
+UNSATISFIABLE
+=== Full SAT Output ===
+UNSAT
+
+=== UNSAT: Skipping nodes/model printing ===
+
+=== END RUN ===

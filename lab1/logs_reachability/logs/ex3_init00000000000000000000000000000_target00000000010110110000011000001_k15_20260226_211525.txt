@@ -1,0 +1,42 @@
+=== RUN @ 20260226_211525 ===
+Verilog  : ./verilog_src/ex3.v
+Init     : 00000000000000000000000000000
+Target   : 00000000010110110000011000001
+Unroll k : 15
+Outdir   : logs_reachability
+MiniSat  : minisat
+Flags    : print=false state_only=false summary=true
+
+WARNING: for repeatability, setting FPU to use double precision
+============================[ Problem Statistics ]=============================
+|                                                                             |
+|  Number of variables:          9074                                         |
+|  Number of clauses:           22785                                         |
+|  Parse time:                   0.00 s                                       |
+|  Eliminated clauses:           0.18 Mb                                      |
+|  Simplification time:          0.01 s                                       |
+|                                                                             |
+============================[ Search Statistics ]==============================
+| Conflicts |          ORIGINAL         |          LEARNT          | Progress |
+|           |    Vars  Clauses Literals |    Limit  Clauses Lit/Cl |          |
+===============================================================================
+===============================================================================
+restarts              : 1
+conflicts             : 37             (1875 /sec)
+decisions             : 263            (0.00 % random) (13327 /sec)
+propagations          : 3617           (183288 /sec)
+conflict literals     : 145            (6.45 % deleted)
+Memory used           : 25.00 MB
+CPU time              : 0.019734 s
+
+SATISFIABLE
+=== SUMMARY ===
+Status   : SAT
+DIMACS   : logs_reachability/out.dimacs
+SAT file : logs_reachability/out.sat
+Nodes    : logs_reachability/out.nodes
+Model    : logs_reachability/out.model
+Clauses  : 22843
+Vars     : 9074
+=== END SUMMARY ===
+=== END RUN ===

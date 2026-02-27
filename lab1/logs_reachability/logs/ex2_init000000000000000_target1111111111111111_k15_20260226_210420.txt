@@ -1,0 +1,6 @@
+=== RUN @ 20260226_210420 ===
+Verilog  : ./verilog_src/ex2.v
+Init     : 000000000000000
+Target   : 1111111111111111
+Unroll k : 15
+

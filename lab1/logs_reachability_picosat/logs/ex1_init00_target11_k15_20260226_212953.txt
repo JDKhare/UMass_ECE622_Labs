@@ -1,0 +1,16 @@
+=== RUN @ 20260226_212953 ===
+Verilog  : ./verilog_src/ex1.v
+Init     : 00
+Target   : 11
+Unroll k : 15
+Outdir   : logs_reachability_picosat
+MiniSat  : picosat
+Flags    : print=false state_only=false summary=false
+
+*** picosat: multiple input files 'logs_reachability_picosat/out.dimacs' and 'logs_reachability_picosat/out.sat'
+=== Full SAT Output ===
+ERROR: logs_reachability_picosat/out.sat not found
+
+=== UNSAT: Skipping nodes/model printing ===
+
+=== END RUN ===

@@ -1,0 +1,9 @@
+=== RUN @ 20260226_212505 ===
+Verilog  : ./verilog_src/stoplight1.v
+Init     : 00000
+Target   : 01000
+Unroll k : 15
+Outdir   : logs_reachability
+MiniSat  : minisat
+Flags    : print=false state_only=false summary=false
+
