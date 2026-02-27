@@ -302,7 +302,10 @@ return 1;
   // Ensure output directory exists
   if (!out_dir.empty()) {
     string cmd = string("mkdir -p ") + out_dir;
-    (void)system(cmd.c_str());
+    int rc = system(cmd.c_str());
+    if (rc != 0) {
+ 	 cerr << "WARNING: mkdir returned non-zero exit code " << rc << "\n";
+	}
   }
   string dimacs_path = out_dir + string("/out.dimacs");
   string nodes_path  = out_dir + string("/out.nodes");
