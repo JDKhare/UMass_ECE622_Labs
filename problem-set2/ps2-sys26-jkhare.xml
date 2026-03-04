@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.6//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_6.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+chan c;</declaration>
+	<template>
+		<name x="5" y="5">sys1_s26</name>
+		<declaration>// Place local declarations here.
+clock x, y;</declaration>
+		<location id="id0" x="-229" y="-42">
+			<name x="-238" y="-76">A</name>
+			<label kind="invariant" x="-238" y="-25">y&lt;=2</label>
+		</location>
+		<location id="id1" x="-34" y="-51">
+			<name x="-44" y="-85">B</name>
+			<label kind="invariant" x="-44" y="-34">x&lt;=3</label>
+		</location>
+		<init ref="id0"/>
+		<transition id="id2">
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-161" y="-102">x==2</label>
+			<nail x="-144" y="-76"/>
+		</transition>
+		<transition id="id3">
+			<source ref="id1"/>
+			<target ref="id1"/>
+			<label kind="guard" x="59" y="-85">x&gt;1</label>
+			<label kind="synchronisation" x="59" y="-68">c!</label>
+			<label kind="assignment" x="59" y="-42">x=0</label>
+			<nail x="42" y="-119"/>
+			<nail x="42" y="0"/>
+		</transition>
+		<transition id="id4">
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-365" y="-85">y==2</label>
+			<label kind="synchronisation" x="-348" y="-68">c!</label>
+			<label kind="assignment" x="-357" y="-42">y=0</label>
+			<nail x="-314" y="-110"/>
+			<nail x="-314" y="9"/>
+		</transition>
+	</template>
+	<template>
+		<name>sys2_s26</name>
+		<location id="id5" x="-246" y="-34">
+			<name x="-256" y="-68">F</name>
+		</location>
+		<location id="id6" x="-42" y="-34">
+			<name x="-51" y="-76">G</name>
+		</location>
+		<init ref="id5"/>
+		<transition id="id7">
+			<source ref="id6"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="-136" y="17">c?</label>
+			<nail x="-187" y="34"/>
+		</transition>
+		<transition id="id8">
+			<source ref="id5"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="-170" y="-102">c?</label>
+			<nail x="-110" y="-102"/>
+		</transition>
+	</template>
+	<system>// List one or more processes to be composed into a system.
+system sys1_s26, sys2_s26;</system>
+	<queries>
+		<option key="--diagnostic" value="1"/>
+		<query>
+			<formula>E&lt;&gt; (sys1_s26.A and sys2_s26.F and sys1_s26.x == 1 and sys1_s26.y == 1)</formula>
+			<comment>Checking condition 1</comment>
+			<result outcome="success" type="quality" timestamp="2026-03-03 01:46:36 -0500">
+				<option key="--diagnostic" value="1"/>
+			</result>
+		</query>
+	</queries>
+</nta>
