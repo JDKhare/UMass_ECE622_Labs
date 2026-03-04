@@ -1,0 +1,15 @@
+=== RUN @ 20260304_114330 ===
+Verilog  : ./verilog_src/ex1.v
+Init     : 00
+Target   : 11
+Unroll k : 15
+Outdir   : logs_reachability
+MiniSat  : minisat
+Flags    : print=false state_only=false summary=false
+
+=== Full SAT Output ===
+UNSAT
+
+=== UNSAT: Skipping nodes/model printing ===
+
+=== END RUN ===
