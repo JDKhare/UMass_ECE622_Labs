@@ -240,18 +240,14 @@ int main(int argc, char** argv) {
     return 1;
   }
 
-  // To answer Part C: we need cumulative reachable states for k = 1 to max_k.
-  // We represent state as an integer 0..2^n - 1.
   int total_states = 1 << n;
   vector<bool> reachable(total_states, false);
   
-  // The initial state is obviously reachable at depth 0
+  // Base reachable logic
   int init_val = 0;
   for (int i = 0; i < n; i++) {
       if (init_bits[i] == '1') init_val |= (1 << (n - 1 - i));
   }
-  // The problem usually asks what's reachable *within* i transitions. 
-  // Initial state is reachable within 0...
   reachable[init_val] = true;
 
   cout << "Calculating cumulative reachable states for " << vfile << " from k=1 to " << max_k << "\n";
@@ -265,7 +261,6 @@ int main(int argc, char** argv) {
   for (int k = 1; k <= max_k; k++) {
       auto t_start = chrono::high_resolution_clock::now();
       
-      // 1. Build base CNF for k transitions WITHOUT target state
       CNF base_cnf;
       VarMap vm;
       auto var = [&](const string& node, int t)->int { return vm.get(node, t); };
@@ -293,7 +288,6 @@ int main(int argc, char** argv) {
         }
       }
 
-      // Constrain initial state
       for (int i = 0; i < n; i++) {
         char b = init_bits[i];
         int v = var(state_regs[i], 0);
@@ -303,24 +297,17 @@ int main(int argc, char** argv) {
 
       base_cnf.nvars = vm.next_id - 1;
       
-      // Identify the variables for the target state at timeframe k
       vector<int> target_vars(n);
       for (int i = 0; i < n; i++) {
           target_vars[i] = var(state_regs[i], k);
       }
 
-      // 2. Loop through all 2^N states to check reachability
       int newly_reached = 0;
 
       for (int s = 0; s < total_states; s++) {
-          // Optimization: if it's already reachable, we don't need to check it again
-          // since Part C asks for CUMULATIVE reachable states within i transitions.
           if (reachable[s]) continue;
 
-          // It's not reachable yet. Let's dump the DIMACS and append the unit clauses for this state.
           ofstream fout(tmp_dimacs.c_str());
-          
-          // Notice we add 'n' extra clauses (one for each state bit)
           fout << "p cnf " << base_cnf.nvars << " " << base_cnf.clauses.size() + n << "\n";
           
           for (auto &cl : base_cnf.clauses) {
@@ -328,7 +315,6 @@ int main(int argc, char** argv) {
             fout << "0\n";
           }
           
-          // Append target clauses
           for (int i = 0; i < n; i++) {
               int bit_val = (s >> (n - 1 - i)) & 1;
               int v = target_vars[i];
@@ -337,11 +323,9 @@ int main(int argc, char** argv) {
           }
           fout.close();
 
-          // Run minisat
           string cmd = "minisat " + tmp_dimacs + " " + tmp_sat + " > /dev/null 2>&1";
           int rc = system(cmd.c_str());
 
-          // Read result
           bool is_sat = false;
           ifstream fsat(tmp_sat.c_str());
           string l;
@@ -364,7 +348,6 @@ int main(int argc, char** argv) {
       auto t_end = chrono::high_resolution_clock::now();
       chrono::duration<double> diff = t_end - t_start;
 
-      // Calculate cumulative
       int cumulative = 0;
       for (int s = 0; s < total_states; s++) {
           if (reachable[s]) cumulative++;
@@ -373,8 +356,11 @@ int main(int argc, char** argv) {
       cout << k << "\t" << newly_reached << "\t" << cumulative << "\t\t" << diff.count() << "\n";
   }
 
-  // Cleanup temp files
+#ifdef _WIN32
+  system("del temp_partc.dimacs temp_partc.sat 2>nul");
+#else
   system("rm -f temp_partc.dimacs temp_partc.sat");
+#endif
 
   cout << "\nDone! Total reachable states cumulatively up to k=" << max_k << " is: ";
   int final_cumulative = 0;
@@ -383,8 +369,5 @@ int main(int argc, char** argv) {
   }
   cout << final_cumulative << "\n";
 
-  // Print the generated file name to stdout to help shell scripts chain commands
-  cout << dimacs_path << "\n";
   return 0;
 }
-
