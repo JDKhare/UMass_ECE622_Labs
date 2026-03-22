@@ -68,11 +68,8 @@ system sys1_s26, sys2_s26;</system>
 	<queries>
 		<option key="--diagnostic" value="1"/>
 		<query>
-			<formula>E&lt;&gt; (sys1_s26.A and sys2_s26.F and sys1_s26.x == 1 and sys1_s26.y == 1)</formula>
+			<formula>E&lt;&gt; (sys1_s26.B and sys2_s26.F and sys1_s26.x == 1 and sys1_s26.y == 1)</formula>
 			<comment>Checking condition 1</comment>
-			<result outcome="success" type="quality" timestamp="2026-03-03 01:46:36 -0500">
-				<option key="--diagnostic" value="1"/>
-			</result>
 		</query>
 	</queries>
 </nta>
