@@ -1,0 +1,174 @@
+﻿ECE 522/622 - Spring 2026 Modeling and Verification of Embedded Systems Lab #2 Verification of Timed Automata using UPPAAL 
+
+
+A.1) Does an execution exist in which all four Vikings get across the bridge in less than or equal to 60 minutes? If yes, provide the schedule of bridge crossings, and explain how you used UPPAAL to get the result. Provide a schedule of the crossings as a table in your report. Each row of the table should correspond to one trip across the bridge. The columns of the table should indicate: 1. Which Viking or Vikings cross the bridge on the trip. You can identify them by their crossing times. 2. The start time of the trip. 3. Whether the trip starts from the safe or unsafe side of the bridge.
+
+
+ans) Yes, I modified E<> Viking1.safe and Viking2.safe and Viking3.safe and Viking4.safe and time <=60, and added <=60 in condition. It showed a successful verification. So I started to use a simulator to trace their steps. First, I let 5 and 10 to start together and let 5 bring back the torch because 5 can bring the torch faster than others. Second, I let 20 and 25 start together because they are slower than others and let 10 back to bring 5 to cross the bridge together.      
+35 instead of 10. 2nd col
+  
+
+
+
+A.2) Now add a fifth Viking that needs 40 minutes to cross the bridge in each direction. What is the shortest time for all five Vikings to get across the bridge? Explain how you modified the system model to realize this change and explain what queries you used to find the shortest possible crossing time. Submit your modified model with queries as filename _a2.xml (for example, my file would be called holcomb_a2.xml). As before, include a table to show the schedule of crossings.
+
+
+I added const int slowest2 = 40; Viking5 = Soldier(slowest2); system Viking1, Viking2, Viking3, Viking4, Viking5,  Torch; E<> Viking1.safe and Viking2.safe and Viking3.safe and Viking4.safe and Viking5.safe 
+and started to use simulator to trace the steps. First I let 5 and 10 to cross the bridge together and 5 bring back the torch. Second, I let two slower vikings 25 and 50 to cross together and let 10 bring back the torch. Third, I let 5 and 20 to cross the bridge. Last, 5 and 10 cross together.
+
+
+Row 3, 5. 
+  
+
+  
+  
+  
+
+
+
+
+
+A.3) Building on question A.2, now consider a scenario in which each of the five Vikings has the option to reach the safe side by talking a longer path through the valley below, instead of crossing the bridge. Crossing through the valley does not require a torch. It takes each Viking 4 times longer to cross the valley than it does for them to cross the bridge. The bridge can still carry two Vikings, as before. There is no limit to the number of Vikings that can cross through the valley. In this modified scenario, what is the shortest time for all five Vikings to reach the safe side? Include in your report an image showing what modifications you’ve made to the model to answer this question, explain the modifications in your report, and explain what queries you’ve used to find the shortest possible crossing time. As before, include a table to show the schedule of crossings, but now your table must have a 4th column indicating whether each crossing is by bridge or valley. Submit your modified model and queries as _a3.xml 
+
+
+The shortest time for all five vikings to reach the safe side is 65s. I added a valley location in solider template and its invariant is y <= 4*delay according to questions which say it takes each viking 4 times longer to cross the valley. In verification, I added E<> Viking1.safe and Viking2.safe and Viking3.safe and Viking4.safe and Viking5.safe and time<=65 to check if they can cross the bridge or valley in 65s. In a symbolic trace, I let 5 and 20 to cross the bridge together,5 bring the torch back and 10 cross the valley at the same time. After that I let 25, 40 cross the bridge and 5 cross the valley at the same time. So, the total is 65s.
+  
+
+  
+
+  
+  
+
+
+
+
+
+B.1) For properties (b) through (i) in the table below, given as English sentences, explain whether the discrete system will satisfy the property or not. To do this, you should first devise a reachability check that could determine whether the property is true or false for the system; you are free to decide whether reaching the target state would show that the corresponding property is true for the system, or false. Then use your understanding of the model to predict the outcome and give a brief justification of how the target can be reached, or why it cannot be reached. Note that you are solving this problem with intuition and are not using tools to perform a reachability check on the discrete model. For some of the properties, you might have to include extra states or variables to track information needed for checking the property.
+
+
+(a)Reachability check: Add a globaltime clock variable to check if it can count since initial state. Check if globaltime==70 and trafficlight == pending.
+        Expected check:
+(b)Reachability check: Check if green light appear at the same time.
+Expected check:
+(c)Reachability check: Check if traffic is green light and clock variable greater than 90
+Expected check:
+        (d)Reachability check: Check if traffic can stay in pending state and clock variable greater than55
+Expected check:
+        (e)Reachability check:Check if traffic can stay in pending state and clock variable greater than65
+Expected check:
+(f)Reachability check: Check if trafficlight is green and crosswalklight is red
+Expected check:
+(g)Reachability check: Check when crosswalk light is red can trafficlight be yellow, red or green
+Expected check:
+(h)Reachability check: Add siggcount integer variable, accumulate when sigG is received and check if globaltime clock <=400.
+Expected check:
+(i)Reachability check:Add siggcount integer variable, accumulate when sigG is received and check if globaltime clock <=300.
+Expected check:
+
+
+
+
+B.2) In UPPAAL model the traffic light and crosswalk light system as timed automata. Test your system (e.g. using concrete simulation or simple reachability checks) to gain confidence that it works as intended. You will then test it more formally in the next step.  
+
+
+  
+
+Trafficlight system
+  
+
+crosswalk light system
+  
+  
+
+Pedbutton                                             receiver
+
+
+Check if the model can reach these point
+  
+
+
+
+
+
+
+
+B.3) Map each condition from the table in B.1 to an appropriate query that can be checked in UPPAAL on your model from B.2, and report the result. Provide in your report a screenshot of the verifier window that shows all queries and whether they are reachable (UPPAAL indicates this by adding red or green circles next to each query once it is checked). 
+
+
+***(g) is false, because we tested all the traffic light condition, it can be either yellow, red or green.***
+
+
+  
+
+  
+
+
+
+
+
+
+
+B.4) Now add another component to the system that models a pedestrian trying to cross the crosswalk. The pedestrian’s input should be pedG from the crosswalk light, and the pedestrian’s output should be pedButton going to the traffic light. The pedestrian model will therefore replace the component you were previously using to generate and transmit pedButton and also replace the component you were using to receive pedG.  The pedestrian model should have an idle initial location, a waiting location, and a crossing location. When transitioning from idle to waiting, the pedButton output should get asserted to indicate that a request to cross the street has been made. The pedestrian starts crossing when the pedG input occurs. The pedestrian should spend a fixed amount of time in the crossing location, and that time must be a parameter of the model so you can easily change it, and we can easily test it; the name of that parameter must be pedCrossTime. Because the system already makes certain assumptions about how quickly a pedestrian crosses the street, the system may be safe or unsafe depending on the value of the pedCrossTime parameter.
+   
+                                Pedestrian system
+
+
+• Describe the bad condition that can occur if the pedestrian crosses the street too slowly. 
+            When pedestrians are still crossing the street and the traffic light turns green.
+• What range of values for pedCrossTime allow the bad condition to occur, causing the system to be unsafe? Support your answer by using reachability queries to show that the bad condition can occur for some values of pedCrossTime but cannot occur for other values of pedCrossTime 
+    When x turns 60, the system becomes unsafe because pedestrians are still crossing and traffic lights turn green. Before 60 (59) system is safe because pedestrian cannot cross the road when the traffic lights turn green,
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+B.5) [ECE622 students] Now change the model to be more robust, such that it is safe regardless of how long it takes the pedestrian to cross. Explain your change. Using your modified model, repeat your query from the prior step using a value of pedCrossTime that was unsafe in the previous step, and show that it is now safe after the change. You are allowed to change the traffic light and/or pedestrian light components in the new model if you find that helpful. Simulate and/or use other queries as well to gain confidence that your system works correctly. With pedCrossTime set to be a value that was unsafe in prior step, but is now safe, name the model file and query as _b5.xml and submit it with the report. 
+
+
+I added a signal done to make sure that pedestrian cross the road. After a pedestrian crosses the road the signal done will be sent to trafficlightcontroller, trafficlightcontroller receives the signal done and sends sigG to turn traffic light to green. After this change, the pedestrian can cross the road when the traffic light is still in red in x=60 seconds.
+  
+
+                Trafficlightcontroller system
+  
+
+                Pedestrian system
+  
+
+  
+
+
+
+
+
+
+
+  
+
+  
+hahahahahahah
+  
+
+  
+
+I dont write its gpt mostly. I write very slow myself
+  
+
+These are so funny
+  
+
+  
+
+Hahaha this looks like u
