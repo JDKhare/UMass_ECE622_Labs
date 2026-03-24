@@ -117,7 +117,7 @@ clock time;		// Global time
 const int fast    = 10;
 const int slow    = 20;
 const int slowest1 = 25;
-const int slowest2 = 40;
+const int slowest2 = 10;
 
 Viking1 = Soldier(fastest);
 Viking2 = Soldier(fast);
@@ -179,12 +179,12 @@ system Viking1, Viking2, Viking3, Viking4, Viking5,  Torch;</system>
 			</result>
 		</query>
 		<query>
-			<formula>E&lt;&gt; Viking1.safe and Viking2.safe and Viking3.safe and Viking4.safe and Viking5.safe and time&lt;=65
+			<formula>E&lt;&gt; Viking1.safe and Viking2.safe and Viking3.safe and Viking4.safe and Viking5.safe and time&lt;=40
 			</formula>
 			<comment>Scheduling problem reformulated as reachability formula. Use
 'Diagnostic Trace:Fastest' option to find fastest solution.
 			</comment>
-			<result outcome="success" type="quality" timestamp="2026-03-14 18:07:13 -0400">
+			<result outcome="success" type="quality" timestamp="2026-03-24 17:16:13 -0400">
 				<option key="--diagnostic" value="0"/>
 			</result>
 		</query>
