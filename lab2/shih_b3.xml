@@ -209,9 +209,9 @@ system trafficlightcontroller1, crosswalklight1 , pedbuttom1, receiverG, receive
 			<comment>//e</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt; trafficlightcontroller1.pending and trafficlightcontroller1.x &gt;65</formula>
+			<formula>E&lt;&gt; trafficlightcontroller1.pending and trafficlightcontroller1.x &gt;45</formula>
 			<comment/>
-			<result outcome="failure" type="quality" timestamp="2026-03-14 22:57:06 -0400">
+			<result outcome="success" type="quality" timestamp="2026-03-24 17:32:17 -0400">
 			</result>
 		</query>
 		<query>
@@ -229,9 +229,9 @@ system trafficlightcontroller1, crosswalklight1 , pedbuttom1, receiverG, receive
 			<comment>//c</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt; trafficlightcontroller1.green and trafficlightcontroller1.x &gt;90</formula>
+			<formula>E&lt;&gt; trafficlightcontroller1.green and trafficlightcontroller1.x &gt;120</formula>
 			<comment/>
-			<result outcome="failure" type="quality" timestamp="2026-03-14 22:56:16 -0400">
+			<result outcome="failure" type="quality" timestamp="2026-03-24 17:32:21 -0400">
 			</result>
 		</query>
 		<query>
