@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1774461190 "Lab2Report.tex" "Lab2Report.pdf" "Lab2Report" 1774461191
+["pdflatex"] 1774462359 "Lab2Report.tex" "Lab2Report.pdf" "Lab2Report" 1774462428
   "/home/ece558_658_2025/jkhare/.texlive2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1774298802 734105 98ed08bed78ed7b1f57a578fb44e5c41 ""
   "/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map" 1505175693 2409932 f79b4f632000ddea55e8f74cd4f9d531 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
@@ -159,9 +159,10 @@
   "/usr/share/texlive/texmf-dist/tex/latex/url/url.sty" 1480098842 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty" 1480098843 55589 34128738f682d033422ca125f82e5d62 ""
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1685187888 33426 b47e9bbe185cb2dc23aef33961dc9e4b ""
-  "Lab2Report.aux" 1774461191 9820 94faeb8d5931c4522e297dddabcaa77c "pdflatex"
-  "Lab2Report.out" 1774461191 156 1f22e52597af47acc5aaa9378ad59e65 "pdflatex"
-  "Lab2Report.tex" 1774461167 23724 eb451e82bf7afd69f12bdeb99e44b6da ""
+  "Lab2Report.aux" 1774462361 9619 e83f2395ee7641ccd6d3d39b2cb2dcfe "pdflatex"
+  "Lab2Report.out" 1774462361 156 1f22e52597af47acc5aaa9378ad59e65 "pdflatex"
+  "Lab2Report.tex" 1774462357 23155 3ca9ce4667b1456d6e2b802ac51e28f3 ""
+  "report-draft-1/snapshots-26/PARTA3CorrectedPropertySatisfied.png" 1774461004 73725 852beac20d3c0dfd0e33930c5d35ddad ""
   "report-draft-1/snapshots-26/PARTA3CorrectedSoldierModel.png" 1774461004 53910 a0d308123c2a87def3e7e624b11e27f4 ""
   "report-draft-1/snapshots-26/PARTA3CorrectedTorchModel.png" 1774461004 92029 48cbaee965f572f4aab17395e614527a ""
   "report-draft-1/snapshots-26/PartA-1-proof.png" 1774394042 25898 83be7ab355d499572aeeece7eae81e01 ""
@@ -183,11 +184,10 @@
   "report-draft-1/snapshots-26/PartB-b4-pedsys.png" 1774392607 42723 bad3f48d9b49f2d31f43f724a9dc1f0c ""
   "report-draft-1/snapshots-26/PartB-b5-at60.png" 1774392607 7803 a270926d6652bf16370d447c8825f15a ""
   "report-draft-1/snapshots-26/PartB-b5-at60_clause.png" 1774392607 6431 d0066f673158e853e4882492977a5951 ""
-  "report-draft-1/snapshots-26/PartB-b5-crossed_allow_at60.png" 1774392607 25898 83be7ab355d499572aeeece7eae81e01 ""
   "report-draft-1/snapshots-26/PartB-b5-ped.png" 1774392607 36735 dc4c470dd23aad2aa08406e4f975c98a ""
   "report-draft-1/snapshots-26/PartB-b5-traffic.png" 1774392607 72206 f36fd1f497e37ec3ff929a0065f248fa ""
   (generated)
-  "Lab2Report.pdf"
-  "Lab2Report.out"
   "Lab2Report.log"
   "Lab2Report.aux"
+  "Lab2Report.pdf"
+  "Lab2Report.out"
