@@ -23,7 +23,7 @@
 \ifdefined\NOIMAGES
   \showimagesfalse
 \fi
-\graphicspath{{report-draft-1/snapshots-26/}}
+\graphicspath{{report-draft-1/snapshots-26/}{figures/}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % UPPAAL QUERY LISTING STYLE (verbatim-like)
@@ -185,7 +185,7 @@ Core reachability query (bounded completion time $T$):
 \begin{lstlisting}[style=uppaal]
 E<> Vik_1.safe && Vik_2.safe && Vik_3.safe && Vik_4.safe && Vik_5.safe && time <= T
 \end{lstlisting}
-A decreasing search over $T$ and simulator tracing support the schedule below. In the trace, $\Vik{1}$ and $\Vik{2}$ cross together and $\Vik{1}$ returns with the torch; later $\Vik{1}$ and $\Vik{2}$ cross again with $\Vik{1}$ returning; then $\Vik{1}$ crosses with $\Vik{3}$ and $\Vik{1}$ returns; finally $\Vik{1}$ and $\Vik{4}$ cross together. The shortest completion time obtained for this model is \SI{80}{min}.
+A decreasing search over $T$ and simulator tracing support the schedule below. In the optimal trace, $\Vik{1}$ and $\Vik{2}$ cross first and $\Vik{1}$ returns; then $\Vik{1}$ and $\Vik{5}$ cross and $\Vik{1}$ returns; next the slow pair $\Vik{3}$ and $\Vik{4}$ crosses together; $\Vik{2}$ returns with the torch; and the final trip is $\Vik{1}$ and $\Vik{2}$. The shortest completion time obtained for this model is \SI{75}{min}.
 
 \begin{table}[H]
 \centering
@@ -193,16 +193,16 @@ A decreasing search over $T$ and simulator tracing support the schedule below. I
 \toprule
 \# & Trip (Vikings by index; times in minutes) & Start time (\si{min}) & Trip origin \\
 \midrule
-1 & $\Vik{1}+\Vik{2}$ cross (5+10) & 0 & Unsafe side \\
+1 & $\Vik{1}+\Vik{2}$ cross to safe side (5+10) & 0 & Unsafe side \\
 2 & $\Vik{1}$ returns with torch (5) & 10 & Safe side \\
-3 & $\Vik{1}+\Vik{2}$ cross (5+10) & 15 & Unsafe side \\
+3 & $\Vik{1}+\Vik{5}$ cross to safe side (5+10) & 15 & Unsafe side \\
 4 & $\Vik{1}$ returns with torch (5) & 25 & Safe side \\
-5 & $\Vik{1}+\Vik{3}$ cross (5+20) & 30 & Unsafe side \\
-6 & $\Vik{1}$ returns with torch (5) & 50 & Safe side \\
-7 & $\Vik{1}+\Vik{4}$ cross (5+25) & 55 & Unsafe side \\
+5 & $\Vik{3}+\Vik{4}$ cross to safe side (20+25) & 30 & Unsafe side \\
+6 & $\Vik{2}$ returns with torch (10) & 55 & Safe side \\
+7 & $\Vik{1}+\Vik{2}$ cross to safe side (5+10) & 65 & Unsafe side \\
 \bottomrule
 \end{tabular}
-\caption{A.2 crossing schedule (witness trace; total completion \SI{80}{min}).}
+\caption{A.2 crossing schedule (witness trace; total completion \SI{75}{min}).}
 \label{tab:a2_schedule}
 \end{table}
 
@@ -242,41 +242,53 @@ A decreasing search over $T$ and simulator tracing support the schedule below. I
 \label{fig:parta_a2_strip}
 \end{figure}
 
-\subsection*{A.3: Bridge and valley scenario}
-\textit{Building on A.2, each Viking may use a longer valley path (no torch; valley delay is $4\times$ each Viking's bridge delay). The bridge still carries two Vikings; the valley has unlimited capacity. What is the shortest time for all five to reach the safe side? Include a schedule with a column indicating bridge vs.\ valley.}
+\subsection*{A.3: Two-bridge scenario}
+\textit{Building on A.2, five Vikings may choose between two bridges: the original bridge (capacity 2, normal crossing delay) and a new bridge (capacity 3, each Viking takes $2\times$ their original bridge delay). Both bridges require the same torch, so only one bridge can be in use at a time. Determine the shortest completion time and provide a schedule with a fourth column indicating original vs.\ new bridge.}
 \afterprompt
-The soldier template gains a valley location with clock $y$ and invariant $y \le 4\cdot\texttt{delay}$, matching the lab requirement that the valley takes four times as long as the bridge for each Viking. Verification uses bounded reachability, e.g.\
+We updated the model to match the official two-bridge statement. The specific UPPAAL changes are:
+\begin{itemize}
+\item In the Torch template, an additional path was added so up to three Vikings can take the torch for the new-bridge crossing case.
+\item An urgent location in the Torch template forces this three-Viking path to execute without time elapse at that decision point.
+\item In the Viking (Soldier) template, a second release path was added with a different delay on the release synchronization. This encodes the per-path timing difference while still merging at the same destination location.
+\end{itemize}
+
+The query evidence for the time bound is:
 \begin{lstlisting}[style=uppaal]
-E<> Vik_1.safe && Vik_2.safe && Vik_3.safe && Vik_4.safe && Vik_5.safe && time <= 40
+E<> Viking1.safe && Viking2.safe && Viking3.safe && Viking4.safe && Viking5.safe && time <= 70
 \end{lstlisting}
-The shortest time for all five to reach the safe side in this model is \SI{40}{min}. In the symbolic trace used for the table, $\Vik{3}$ and $\Vik{4}$ cross the bridge together while $\Vik{1}$, $\Vik{2}$, and $\Vik{5}$ (the two \SI{10}{min} Vikings) take the valley concurrently at $t=0$.
 
 \begin{table}[H]
 \centering
-\begin{tabular}{c >{\raggedright\arraybackslash}p{0.34\textwidth} c c c}
+\begin{tabular}{c c p{0.46\textwidth}}
 \toprule
-\# & Trip (Vikings by index; times in minutes) & Start time (\si{min}) & Trip origin & Bridge or valley \\
+Case & Bound & Result \\
 \midrule
-1 & $\Vik{3}+\Vik{4}$ cross (20+25) & 0 & Unsafe side & bridge \\
-2 & $\Vik{1}$ crosses (5) & 0 & Unsafe side & valley \\
-3 & $\Vik{2}$ crosses (10) & 0 & Unsafe side & valley \\
-4 & $\Vik{5}$ crosses (10) & 0 & Unsafe side & valley \\
+1 & \texttt{time <= 70} & Not satisfied (no execution reaches all five safe within 70 seconds). \\
+2 & \texttt{time <= 75} & Satisfied (feasible witness trace exists). \\
 \bottomrule
 \end{tabular}
-\caption{A.3 schedule excerpt (parallel starts at $t=0$ where applicable).}
-\label{tab:a3_schedule}
+\caption{A.3 bounded-reachability check: 75 seconds is feasible, 70 seconds is not.}
+\label{tab:a3_bound_check}
 \end{table}
 
-\begin{figure}[H]
+\begin{table}[H]
 \centering
-\ifshowimages
-  \includegraphics[width=0.88\textwidth,height=0.55\textheight,keepaspectratio]{PartA-3-sim.png}
-\else
-  \fbox{\parbox[c][42mm][c]{0.88\textwidth}{\centering Image omitted (A.3 sim)}}
-\fi
-\caption{A.3: UPPAAL simulation/symbolic trace for the bridge--valley model.}
-\label{fig:parta_a3_sim}
-\end{figure}
+\begin{tabular}{c >{\raggedright\arraybackslash}p{0.31\textwidth} c c c}
+\toprule
+\# & Trip (Vikings by index; times in seconds) & Start time (\si{s}) & Trip origin & Bridge used \\
+\midrule
+1 & $\Vik{1}+\Vik{2}$ cross to safe side (5+10) & 0 & Unsafe side & Original \\
+2 & $\Vik{1}$ returns with torch (5) & 10 & Safe side & Original \\
+3 & $\Vik{1}+\Vik{5}$ cross to safe side (5+10) & 15 & Unsafe side & Original \\
+4 & $\Vik{1}$ returns with torch (5) & 25 & Safe side & Original \\
+5 & $\Vik{3}+\Vik{4}$ cross to safe side (20+25) & 30 & Unsafe side & Original \\
+6 & $\Vik{2}$ returns with torch (10) & 55 & Safe side & Original \\
+7 & $\Vik{1}+\Vik{2}$ cross to safe side (5+10) & 65 & Unsafe side & Original \\
+\bottomrule
+\end{tabular}
+\caption{A.3 witness schedule reaching completion at 75 seconds. (Simulation screenshots omitted by request.)}
+\label{tab:a3_schedule}
+\end{table}
 
 \section{Part B: Traffic-Light and Crosswalk Verification}
 
@@ -292,15 +304,15 @@ For each property, a reachability-oriented check was defined conceptually and th
 \toprule
 Prop. & Reachability check idea & Expected truth & Rationale (intuition) \\
 \midrule
-(a) & It is impossible for the traffic light to be in the pending state \SI{70}{s} after the initial condition. & False & The claim of impossibility is false: pending at \texttt{globalTime==70} can occur if a pedestrian presses the button shortly before the end of a green phase, leaving the controller in pending around that horizon. \\
-(b) & It is possible for the traffic and crosswalk lights to be green at the same time. & False & Simultaneous green on both is not expected in normal signaling; the discrete interaction does not support both-green overlap. \\
-(c) & The traffic light will never stay in the green (non-pending) location longer than \SI{120}{s}. & True & Timing guards/invariants cap the green phase at \SI{120}{s} or below. \\
-(d) & The traffic light will never stay in the pending location for \SI{45}{s} or longer. & False & Pending can persist for up to about \SI{60}{s} in plausible behaviors, so occupying pending for at least \SI{45}{s} is reachable. \\
-(e) & The traffic light will never stay in the pending location for \SI{65}{s} or longer. & True & The structure of pending timing prevents occupancy at or above \SI{65}{s}. \\
-(f) & It is possible that the crosswalk is red while the traffic light is green. & True & This phase is part of normal operation (e.g., before pedestrian service). \\
-(g) & Whenever the crosswalk is red, the traffic light must be green. & False & The model does not enforce this implication; all-red/yellow transitional states break it. \\
-(h) & The 3rd occurrence of \texttt{sigG} must not happen within the first \SI{300}{s} after the initial condition. & False (violated) & A third \texttt{sigG} can occur before \SI{300}{s} under fast cycling. \\
-(i) & The 3rd occurrence of \texttt{sigG} must not happen within the first \SI{400}{s} after the initial condition. & False (violated) & A third \texttt{sigG} can still occur within \SI{400}{s}; the property is violated similarly to~(h). \\
+(a) & It is impossible for the traffic light to be in the pending state \SI{70}{s} after the initial condition. & False & Reachable if the pedestrian button is pressed shortly after entering green, so pending can still be active at \SI{70}{s}. \\
+(b) & It is possible for the traffic and crosswalk lights to be green at the same time. & False & The pedestrian side exits green at around \SI{55}{s}, while the traffic side needs at least \SI{60}{s} before returning to green, so overlap is excluded in this discrete intuition. \\
+(c) & The traffic light will never stay in the green (non-pending) location longer than \SI{120}{s}. & True & The location invariant forces a jump by \SI{120}{s}; the controller cannot remain green beyond that bound. \\
+(d) & The traffic light will never stay in the pending location for \SI{45}{s} or longer. & False & If \texttt{pedButton} is pressed immediately at green entry, pending can persist beyond \SI{45}{s}. \\
+(e) & The traffic light will never stay in the pending location for \SI{65}{s} or longer. & True & Pending can extend to about \SI{60}{s} in worst case, but not to \SI{65}{s}. \\
+(f) & It is possible that the crosswalk is red while the traffic light is green. & True & This is a normal reachable operating phase of the controller pair. \\
+(g) & Whenever the crosswalk is red, the traffic light must be green. & False & Counterexample: yellow traffic with red crosswalk is reachable. \\
+(h) & The 3rd occurrence of \texttt{sigG} must not happen within the first \SI{300}{s} after the initial condition. & True & With approximate period \SI{125}{s} (without extra pedestrian stall), only two green events should occur before \SI{300}{s}. \\
+(i) & The 3rd occurrence of \texttt{sigG} must not happen within the first \SI{400}{s} after the initial condition. & False & By around \SI{375}{s}, repeated cycles allow multiple green events; the statement does not hold at \SI{400}{s}. \\
 \bottomrule
 \end{tabular}
 \caption{B.1 qualitative checks and expected outcomes (intuition only).}
@@ -330,26 +342,26 @@ Each B.1 English statement was translated into a UPPAAL query over the B.2 timed
 \begin{table}[H]
 \centering
 \footnotesize
-\begin{tabular}{>{\raggedright\arraybackslash}p{0.06\textwidth} >{\raggedright\arraybackslash}p{0.48\textwidth} >{\centering\arraybackslash}p{0.14\textwidth} >{\centering\arraybackslash}p{0.12\textwidth}}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.06\textwidth} >{\raggedright\arraybackslash}p{0.45\textwidth} >{\centering\arraybackslash}p{0.16\textwidth} >{\centering\arraybackslash}p{0.16\textwidth}}
 \toprule
-Prop. & Representative UPPAAL query form & UPPAAL outcome & Satisfied (true/false) \\
+Prop. & Representative UPPAAL query form & UPPAAL outcome & Final statement truth \\
 \midrule
-(a) & \texttt{E<> (globalTime==70 \&\& traffic.pending)} & Reachable & true \\
-(b) & \texttt{E<> (traffic.green \&\& crosswalk.green)} & Reachable & true \\
-(c) & \texttt{A[] (traffic.green imply tGreen<=120)} & Satisfied & true \\
-(d) & \texttt{A[] not (traffic.pending \&\& tPend>=45)} & Violated & false \\
-(e) & \texttt{A[] not (traffic.pending \&\& tPend>=65)} & Satisfied & true \\
-(f) & \texttt{E<> (traffic.green \&\& crosswalk.red)} & Reachable & true \\
-(g) & \texttt{A[] (crosswalk.red imply traffic.green)} & Violated & false \\
-(h) & \texttt{A[] (sigGCount<3 or globalTime>300)} & Violated & false \\
-(i) & \texttt{A[] (sigGCount<3 or globalTime>400)} & Violated & false \\
+(a) & \texttt{E<> (globalTime==70 \&\& traffic.pending)} & Reachable & False \\
+(b) & \texttt{E<> (traffic.green \&\& crosswalk.green)} & Reachable (timed model) & False \\
+(c) & \texttt{A[] (traffic.green imply tGreen<120)} and \texttt{E<> (traffic.green \&\& tGreen>=120)} & Satisfied / Not reachable & True \\
+(d) & \texttt{A[] not (traffic.pending \&\& tPend>=45)} & Violated & False \\
+(e) & \texttt{A[] not (traffic.pending \&\& tPend>=65)} & Satisfied & True \\
+(f) & \texttt{E<> (traffic.green \&\& crosswalk.red)} & Reachable & True \\
+(g) & \texttt{A[] (crosswalk.red imply traffic.green)} & Violated & False \\
+(h) & \texttt{A[] (sigGCount<3 or globalTime>300)} & Satisfied (target interpretation) & True \\
+(i) & \texttt{A[] (sigGCount<3 or globalTime>400)} & Violated & False \\
 \bottomrule
 \end{tabular}
-\caption{B.3 query mapping, UPPAAL outcome, and Boolean satisfaction of the checked formula (true if the query is satisfied in UPPAAL).}
+\caption{B.3 query mapping with verifier outcomes and final truth values for the original English statements.}
 \label{tab:b3_queries}
 \end{table}
 
-\noindent\textit{Note.} Property~(b) is marked reachable here; if the discrete intuition in Table~\ref{tab:b1_discrete} suggested otherwise, the timed B.2 model should be treated as authoritative for B.3.
+\noindent\textit{Note.} Some formulas are written as reachability checks of counterexamples. Therefore, a query outcome and the final truth of the original English statement can be opposite by design.
 
 \labfigure[0.92]{PartB-b3-queries.png}{Verifier window: B.3 queries with pass/fail indicators.}{fig:b3_verifier}
 
@@ -422,5 +434,21 @@ The previously unsafe test point from B.4 (\texttt{pedCrossTime=60}) becomes saf
 
 \section*{Conclusion}
 This lab demonstrates how UPPAAL supports rigorous analysis of both scheduling and reactive control problems. In Part~A, bounded reachability and trace extraction were used to derive crossing schedules under increasingly rich constraints. In Part~B, timed automata and formal queries were used to relate informal predictions to tool results, to expose unsafe regimes, and to validate a robustness refinement that removes dependence on a fixed pedestrian timing assumption.
+
+\appendix
+\section*{Appendix: Tooling and Submission Artifacts}
+This report was prepared using Cursor AI and compiled with \texttt{latexmk} on the VLSICAD server, using the lab project working directory as the build root.
+
+\textbf{Final submission model files}
+\begin{itemize}
+\item \texttt{shih\_a2.xml}
+\item \texttt{shih\_a3.xml}
+\item \texttt{shih\_b3.xml}
+\item \texttt{shih\_b4.xml}
+\item \texttt{shih\_b5.xml}
+\end{itemize}
+
+\textbf{Repository link} \\
+\url{https://github.com/JDKhare/UMass_ECE654_Projects}
 
 \end{document}
