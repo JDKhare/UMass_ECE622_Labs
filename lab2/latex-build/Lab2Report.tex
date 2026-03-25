@@ -115,7 +115,8 @@ E<> Vik_1.safe && Vik_2.safe && Vik_3.safe && Vik_4.safe && time <= 60
 \end{lstlisting}
 The query is satisfiable, so a feasible execution exists.
 
-Witness schedule from trace:
+Schedule from simulation trace has the following schedule of vikings. First 5 and 10 start together and 5 returns with the torch. Then 20 and 25 start together and 20 returns with the torch. Finally, 5 and 10 start together and 5 returns with the torch. The total completion time is 60 minutes. Following is the table of the schedule:
+
 \begin{table}[H]
 \centering
 \begin{tabular}{c >{\raggedright\arraybackslash}p{0.38\textwidth} c c}
@@ -261,7 +262,7 @@ The correct bounded reachability query for A.3 is:
 E<> Viking1.safe && Viking2.safe && Viking3.safe && Viking4.safe && Viking5.safe && time <= 70
 \end{lstlisting}
 
-We determined satisfiability by incrementally changing the time bound. The shortest completion time observed for this model is \SI{70}{min}, and a witness trace exists for the query above.
+We determined satisfiability by incrementally changing the time bound. The shortest completion time observed for this model is \SI{70}{min}, and a simulation trace (with a satisfying schedule) exists for the query above.
 
 From the trace, the execution first uses Bridge~1 (\texttt{B==0}) for the two slow-pair structure to move \Vik{3} and \Vik{4}, then finishes by using Bridge~2 (\texttt{B==1}) to carry three Vikings together with the required delay penalty. The total time in the trace is \SI{70}{min}.
 
@@ -278,7 +279,7 @@ From the trace, the execution first uses Bridge~1 (\texttt{B==0}) for the two sl
 5 & $\Vik{1}+\Vik{2}+\Vik{5}$ cross to safe side (2$\times$10) & 50 & Unsafe side & Bridge 2 (\texttt{B==1}) \\
 \bottomrule
 \end{tabular}
-\caption{A.3 witness schedule reaching completion at \SI{70}{min}. (Bridge selection shown via \texttt{B} in the satisfying trace.)}
+\caption{A.3 query reaching completion at \SI{70}{min}. (Bridge selection shown via \texttt{B} in the table of schedule.)}
 \label{tab:a3_schedule}
 \end{table}
 
