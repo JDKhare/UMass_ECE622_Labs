@@ -138,11 +138,11 @@ The schedule completes all crossings at minute~60, satisfying the time bound exa
 \begin{figure}[H]
 \centering
 \ifshowimages
-  \includegraphics[width=1.0\textwidth,height=0.825\textheight,keepaspectratio]{PartA-1-proof.png}
+  \includegraphics[width=1\textwidth,height=1.1\textheight,keepaspectratio]{PartA-1-proof.png}
 \else
   \fbox{\parbox[c][55mm][c]{0.98\textwidth}{\centering Image omitted (A.1 proof)}}
 \fi
-\caption{A.1: UPPAAL verifier for bounded reachability within \SI{60}{min} (displayed at 1.5$\times$ prior proof scale, width $\le$ text width).}
+\caption{A.1: UPPAAL verifier for bounded reachability within \SI{60}{min}}
 \label{fig:parta_a1_proof}
 \end{figure}
 
@@ -247,46 +247,38 @@ A decreasing search over $T$ and simulator tracing support the schedule below. I
 \afterprompt
 We updated the model to match the official two-bridge statement. The specific UPPAAL changes are:
 \begin{itemize}
-\item In the Torch template, an additional path was added so up to three Vikings can take the torch for the new-bridge crossing case.
-\item An urgent location in the Torch template forces this three-Viking path to execute without time elapse at that decision point.
-\item In the Viking (Soldier) template, a second release path was added with a different delay on the release synchronization. This encodes the per-path timing difference while still merging at the same destination location.
+\item The Torch template now makes a non-deterministic decision of selecting which bridge to use. This unifies the delay penalties across all Vikings by setting a global bridge selector variable based on the chosen bridge.
+\item A new global declaration was added for the bridge selector, named \texttt{B}. We use \texttt{B==0} for Bridge~1 and \texttt{B==1} for Bridge~2.
+\item An urgent location was added in the Torch template so the choice between bridges occurs without time elapse at the decision point.
 \end{itemize}
 
-The query evidence for the time bound is:
+Reference screenshots of the modified templates used for A.3 are shown in Fig.~\ref{fig:a3_soldier_modified} and Fig.~\ref{fig:a3_torch_modified}.
+\labfigure[0.78]{PARTA3CorrectedSoldierModel.png}{A.3: Modified Viking (Soldier) template used in the two-bridge model.}{fig:a3_soldier_modified}
+\labfigure[0.78]{PARTA3CorrectedTorchModel.png}{A.3: Modified Torch template with an urgent bridge-selection choice and bridge selector \texttt{B}.}{fig:a3_torch_modified}
+
+The correct bounded reachability query for A.3 is:
 \begin{lstlisting}[style=uppaal]
 E<> Viking1.safe && Viking2.safe && Viking3.safe && Viking4.safe && Viking5.safe && time <= 70
 \end{lstlisting}
 
-\begin{table}[H]
-\centering
-\begin{tabular}{c c p{0.46\textwidth}}
-\toprule
-Case & Bound & Result \\
-\midrule
-1 & \texttt{time <= 70} & Not satisfied (no execution reaches all five safe within 70 seconds). \\
-2 & \texttt{time <= 75} & Satisfied (feasible witness trace exists). \\
-\bottomrule
-\end{tabular}
-\caption{A.3 bounded-reachability check: 75 seconds is feasible, 70 seconds is not.}
-\label{tab:a3_bound_check}
-\end{table}
+We determined satisfiability by incrementally changing the time bound. The shortest completion time observed for this model is \SI{70}{min}, and a witness trace exists for the query above.
+
+From the trace, the execution first uses Bridge~1 (\texttt{B==0}) for the two slow-pair structure to move \Vik{3} and \Vik{4}, then finishes by using Bridge~2 (\texttt{B==1}) to carry three Vikings together with the required delay penalty. The total time in the trace is \SI{70}{min}.
 
 \begin{table}[H]
 \centering
-\begin{tabular}{c >{\raggedright\arraybackslash}p{0.31\textwidth} c c c}
+\begin{tabular}{c >{\raggedright\arraybackslash}p{0.33\textwidth} c c c}
 \toprule
-\# & Trip (Vikings by index; times in seconds) & Start time (\si{s}) & Trip origin & Bridge used \\
+\# & Trip (Vikings by index; times in minutes) & Start time (\si{min}) & Trip origin & Bridge used \\
 \midrule
-1 & $\Vik{1}+\Vik{2}$ cross to safe side (5+10) & 0 & Unsafe side & Original \\
-2 & $\Vik{1}$ returns with torch (5) & 10 & Safe side & Original \\
-3 & $\Vik{1}+\Vik{5}$ cross to safe side (5+10) & 15 & Unsafe side & Original \\
-4 & $\Vik{1}$ returns with torch (5) & 25 & Safe side & Original \\
-5 & $\Vik{3}+\Vik{4}$ cross to safe side (20+25) & 30 & Unsafe side & Original \\
-6 & $\Vik{2}$ returns with torch (10) & 55 & Safe side & Original \\
-7 & $\Vik{1}+\Vik{2}$ cross to safe side (5+10) & 65 & Unsafe side & Original \\
+1 & $\Vik{1}+\Vik{2}$ cross to safe side (5+10) & 0 & Unsafe side & Bridge 1 (\texttt{B==0}) \\
+2 & $\Vik{1}$ returns with torch (5) & 10 & Safe side & Bridge 1 (\texttt{B==0}) \\
+3 & $\Vik{3}+\Vik{4}$ cross to safe side (20+25) & 15 & Unsafe side & Bridge 1 (\texttt{B==0}) \\
+4 & $\Vik{2}$ returns with torch (10) & 40 & Safe side & Bridge 1 (\texttt{B==0}) \\
+5 & $\Vik{1}+\Vik{2}+\Vik{5}$ cross to safe side (2$\times$10) & 50 & Unsafe side & Bridge 2 (\texttt{B==1}) \\
 \bottomrule
 \end{tabular}
-\caption{A.3 witness schedule reaching completion at 75 seconds. (Simulation screenshots omitted by request.)}
+\caption{A.3 witness schedule reaching completion at \SI{70}{min}. (Bridge selection shown via \texttt{B} in the satisfying trace.)}
 \label{tab:a3_schedule}
 \end{table}
 
