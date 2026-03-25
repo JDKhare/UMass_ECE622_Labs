@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.6//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_6.dtd'>
+<nta>
+	<declaration>/*
+ * Four vikings are about to cross a damaged bridge in the middle of the
+ * night. The bridge can only carry two of the vikings at the time and to
+ * find the way over the bridge the vikings need to bring a torch.  The
+ * vikings need 5, 10, 20 and 25 minutes (one-way) respectively to cross
+ * the bridge.
+
+ * Does a schedule exist which gets all four vikings over the bridge
+ * within 60 minutes?
+ */
+
+chan take, release;		// Take and release torch
+int[0,1] L;		// The side the torch is on
+clock time;		// Global time
+</declaration>
+	<template>
+		<name x="32" y="16">Soldier</name>
+		<parameter>const int delay</parameter>
+		<declaration>clock y;</declaration>
+		<location id="id0" x="288" y="80">
+		</location>
+		<location id="id1" x="288" y="216">
+			<name x="272" y="232">safe</name>
+		</location>
+		<location id="id2" x="64" y="216">
+		</location>
+		<location id="id3" x="64" y="80">
+			<name x="56" y="48">unsafe</name>
+		</location>
+		<location id="id4" x="204" y="-76">
+			<name x="194" y="-110">valley</name>
+			<label kind="invariant" x="221" y="-85">y &lt;= 4*delay</label>
+		</location>
+		<init ref="id3"/>
+		<transition id="id5">
+			<source ref="id4"/>
+			<target ref="id1"/>
+			<label kind="guard" x="221" y="-8">y&gt;=4*delay</label>
+		</transition>
+		<transition id="id6">
+			<source ref="id3"/>
+			<target ref="id4"/>
+			<label kind="assignment" x="136" y="0">y=0</label>
+		</transition>
+		<transition id="id7">
+			<source ref="id2"/>
+			<target ref="id3"/>
+			<label kind="guard" x="72" y="176">y &gt;= delay</label>
+			<label kind="synchronisation" x="72" y="120">release!</label>
+		</transition>
+		<transition id="id8">
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="guard" x="208" y="224">L == 1</label>
+			<label kind="synchronisation" x="216" y="192">take !</label>
+			<label kind="assignment" x="104" y="224">y = 0</label>
+		</transition>
+		<transition id="id9">
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="guard" x="296" y="112">y &gt;= delay</label>
+			<label kind="synchronisation" x="296" y="160">release!</label>
+		</transition>
+		<transition id="id10">
+			<source ref="id3"/>
+			<target ref="id0"/>
+			<label kind="guard" x="120" y="56">L == 0</label>
+			<label kind="synchronisation" x="120" y="88">take !</label>
+			<label kind="assignment" x="178" y="85">y = 0</label>
+		</transition>
+	</template>
+	<template>
+		<name x="32" y="-16">Torch</name>
+		<location id="id11" x="200" y="192">
+			<name x="192" y="200">one</name>
+		</location>
+		<location id="id12" x="200" y="48">
+			<urgent/>
+		</location>
+		<location id="id13" x="64" y="120">
+			<name x="48" y="88">free</name>
+		</location>
+		<location id="id14" x="336" y="120">
+			<name x="328" y="88">two</name>
+		</location>
+		<init ref="id13"/>
+		<transition id="id15">
+			<source ref="id13"/>
+			<target ref="id12"/>
+			<label kind="synchronisation" x="104" y="56">take?</label>
+		</transition>
+		<transition id="id16">
+			<source ref="id12"/>
+			<target ref="id11"/>
+		</transition>
+		<transition id="id17">
+			<source ref="id12"/>
+			<target ref="id14"/>
+			<label kind="synchronisation" x="264" y="56">take?</label>
+		</transition>
+		<transition id="id18">
+			<source ref="id11"/>
+			<target ref="id13"/>
+			<label kind="synchronisation" x="96" y="176">release?</label>
+			<label kind="assignment" x="32" y="144">L = 1 - L</label>
+		</transition>
+		<transition id="id19">
+			<source ref="id14"/>
+			<target ref="id11"/>
+			<label kind="synchronisation" x="256" y="176">release?</label>
+		</transition>
+	</template>
+	<system>const int fastest = 5;
+const int fast    = 10;
+const int slow    = 20;
+const int slowest1 = 25;
+const int slowest2 = 10;
+
+Viking1 = Soldier(fastest);
+Viking2 = Soldier(fast);
+Viking3 = Soldier(slow);
+Viking4 = Soldier(slowest1);
+Viking5 = Soldier(slowest2);
+
+system Viking1, Viking2, Viking3, Viking4, Viking5,  Torch;</system>
+	<queries>
+		<option key="--diagnostic" value="0"/>
+		<query>
+			<formula>E&lt;&gt; Viking1.valley</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2026-03-14 16:43:32 -0400">
+			</result>
+		</query>
+		<query>
+			<formula>A[] not deadlock
+			</formula>
+			<comment>The system is deadlock free.
+			</comment>
+			<result outcome="success" type="quality" timestamp="2026-03-14 00:05:49 -0400">
+			</result>
+		</query>
+		<query>
+			<formula>E&lt;&gt; Viking1.safe
+			</formula>
+			<comment>Viking 1 can cross the bridge.
+			</comment>
+			<result outcome="success" type="quality" timestamp="2026-03-14 16:32:33 -0400">
+			</result>
+		</query>
+		<query>
+			<formula>E&lt;&gt; Viking2.safe
+			</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2026-03-14 00:05:56 -0400">
+			</result>
+		</query>
+		<query>
+			<formula>E&lt;&gt; Viking3.safe
+			</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2026-03-14 00:05:58 -0400">
+			</result>
+		</query>
+		<query>
+			<formula>A[] not (Viking4.safe and time&lt;slowest)
+			</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2026-03-14 00:05:59 -0400">
+			</result>
+		</query>
+		<query>
+			<formula>E&lt;&gt; Viking4.safe imply time&gt;=slowest
+			</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2026-03-14 00:06:01 -0400">
+			</result>
+		</query>
+		<query>
+			<formula>E&lt;&gt; Viking1.safe and Viking2.safe and Viking3.safe and Viking4.safe and Viking5.safe and time&lt;=40
+			</formula>
+			<comment>Scheduling problem reformulated as reachability formula. Use
+'Diagnostic Trace:Fastest' option to find fastest solution.
+			</comment>
+			<result outcome="success" type="quality" timestamp="2026-03-24 17:16:13 -0400">
+				<option key="--diagnostic" value="0"/>
+			</result>
+		</query>
+	</queries>
+</nta>
