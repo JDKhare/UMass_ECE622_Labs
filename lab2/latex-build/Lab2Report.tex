@@ -42,8 +42,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % INFORMATION MACROS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\studentname}{Shu-Lin Shih and Jaideep Khare}
-\newcommand{\studentnumber}{35199856 and 35193853}
+\newcommand{\studentname}{Jaideep Khare and Shu-Lin Shih}
+\newcommand{\studentnumber}{35193853 and 35199856}
 \newcommand{\coursename}{ECE 622: Modeling \& Verification of Embedded Systems}
 \newcommand{\semester}{Spring 2026}
 
@@ -91,7 +91,7 @@
 Submitted by:  & {\studentname} \\
 Student ID:     & {\studentnumber} \\
 Lab No.:        & 2 \\
-Submission Date:& March 2026 \\
+Submission Date:& 25th March, 2026 \\
 \end{tabular}
 
 \vspace{3mm}
@@ -202,7 +202,7 @@ A decreasing search over $T$ and simulator tracing support the schedule below. I
 7 & $\Vik{1}+\Vik{2}$ cross to safe side (5+10) & 65 & Unsafe side \\
 \bottomrule
 \end{tabular}
-\caption{A.2 crossing schedule (witness trace; total completion \SI{75}{min}).}
+\caption{A.2 crossing schedule (different ordering of Vikings also possible; total completion \SI{75}{min}).}
 \label{tab:a2_schedule}
 \end{table}
 
@@ -281,6 +281,8 @@ From the trace, the execution first uses Bridge~1 (\texttt{B==0}) for the two sl
 \caption{A.3 witness schedule reaching completion at \SI{70}{min}. (Bridge selection shown via \texttt{B} in the satisfying trace.)}
 \label{tab:a3_schedule}
 \end{table}
+
+\labfigure[0.92]{PARTA3CorrectedPropertySatisfied.png}{A.3: Verifier screenshot showing the bounded reachability query is satisfied for \texttt{time <= 70}.}{fig:a3_query_satisfied}
 
 \section{Part B: Traffic-Light and Crosswalk Verification}
 
@@ -402,34 +404,18 @@ The previously unsafe test point from B.4 (\texttt{pedCrossTime=60}) becomes saf
 \labfigure[0.84]{PartB-b5-traffic.png}{Traffic controller with \texttt{done} handshake (B.5).}{fig:b5_traffic}
 \labfigure[0.84]{PartB-b5-ped.png}{Pedestrian model cooperating with \texttt{done} (B.5).}{fig:b5_ped}
 \labfigure[0.55]{PartB-b5-at60.png}{B.5: safety re-check at \texttt{pedCrossTime=60} (now safe).}{fig:b5_at60}
-\labfigure[0.55]{PartB-b5-at60_clause.png}{B.5: corresponding query/clause for the unsafe condition at \texttt{pedCrossTime=60}.}{fig:b5_at60_clause}
-\labfigure[0.72]{PartB-b5-crossed_allow_at60.png}{B.5: additional confidence checks (e.g.\ crossing allowed under robust model).}{fig:b5_crossed}
-
-\begin{table}[H]
-\centering
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{>{\raggedright\arraybackslash}p{0.04\textwidth} >{\raggedright\arraybackslash}p{0.30\textwidth} >{\raggedright\arraybackslash}p{0.54\textwidth} >{\centering\arraybackslash}p{0.06\textwidth}}
-\toprule
-\# & Lab~2 B.5 requirement (paraphrase) & What this report demonstrates & OK? \\
-\midrule
-1 & Robust model: safe regardless of crossing duration. & \texttt{done} handshake; green deferred until crossing completes (Figs.~\ref{fig:b5_traffic}--\ref{fig:b5_ped}). & Y \\
-2 & Explain the change in the report. & Text and figures; \texttt{done} removes reliance on a fixed \texttt{pedCrossTime} for safety. & Y \\
-3 & Repeat B.4 safety query at a previously unsafe \texttt{pedCrossTime}; show safe after change. & Figs.~\ref{fig:b5_at60}--\ref{fig:b5_at60_clause}: bad condition unreachable at \texttt{pedCrossTime=60}. & Y \\
-4 & Simulate / use extra queries for confidence. & Fig.~\ref{fig:b5_crossed} and B.2-style checks. & Y \\
-5 & Submit \texttt{\_b5.xml} with the report. & Course-style filename (e.g.\ \texttt{*\_b5.xml}) included with submission materials. & Y \\
-\bottomrule
-\end{tabular}
-\caption{B.5 alignment checklist: lab wording vs.\ evidence in this report (for grading).}
-\label{tab:b5_alignment}
-\end{table}
+\labfigure[0.55]{PartB-b5-at60_clause.png}{B.5: corresponding declaration line for the unsafe condition at \texttt{pedCrossTime=60}.}{fig:b5_at60_clause}
 
 \section*{Conclusion}
-This lab demonstrates how UPPAAL supports rigorous analysis of both scheduling and reactive control problems. In Part~A, bounded reachability and trace extraction were used to derive crossing schedules under increasingly rich constraints. In Part~B, timed automata and formal queries were used to relate informal predictions to tool results, to expose unsafe regimes, and to validate a robustness refinement that removes dependence on a fixed pedestrian timing assumption.
+This lab helped us understand how timing constraints and synchronization mechanisms like channels, can be used to model and verify complex systems. We also learned how to use UPPAAL to model and verify systems, and how to use the tool to extract schedules and traces. Part A.3 Torch modeling was a good exercise to finally get it right! Thank you for a great lab!
 
 \appendix
 \section*{Appendix: Tooling and Submission Artifacts}
 This report was prepared using Cursor AI and compiled with \texttt{latexmk} on the VLSICAD server, using the lab project working directory as the build root.
+
+Cursor was also used to iteratively edit and format the \LaTeX{} source (tables, figures, and UPPAAL query listings) while keeping the report consistent with the lab writeup. However, heavily critical verification was done by us to make tiny details are consistent with the lab writeup. Due to hallucinations, sometimes reiterations or clarifications were needed to make AI understand the context of problems and difference between true statements and opinions/hypotheses.
+
+For modeling and simulation, UPPAAL was run on a Windows PC; screenshots/snapshots generated during UPPAAL runs were committed alongside the \LaTeX{} sources and synchronized via GitHub, so the Linux build environment and the Windows modeling environment stayed aligned on the same report inputs.
 
 \textbf{Final submission model files}
 \begin{itemize}

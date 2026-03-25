@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2026.3.23)  25 MAR 2026 13:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2026.3.23)  25 MAR 2026 14:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1145,170 +1145,174 @@ png  used on input line 257. on input line 257.
 Package pdftex.def Info: Requested size: 375.86226pt x 195.15822pt on input lin
 e 257.
  [4 <./report-draft-1/snapshots-26/PARTA3CorrectedSoldierModel.png> <./report-d
-raft-1/snapshots-26/PARTA3CorrectedTorchModel.png>] [5]
-<report-draft-1/snapshots-26/PartB-b2-trafficsys.png, id=93, 851.43094pt x 499.
+raft-1/snapshots-26/PARTA3CorrectedTorchModel.png>]
+<report-draft-1/snapshots-26/PARTA3CorrectedPropertySatisfied.png, id=83, 1895.
+58188pt x 764.8575pt>
+File: report-draft-1/snapshots-26/PARTA3CorrectedPropertySatisfied.png Graphic 
+file (type png)
+<use report-draft-1/snapshots-26/PARTA3CorrectedPropertySatisfied.png>
+Package pdftex.def Info: report-draft-1/snapshots-26/PARTA3CorrectedPropertySat
+isfied.png  used on input line 285. on input line 285.
+Package pdftex.def Info: Requested size: 443.32452pt x 178.8779pt on input line
+ 285.
+ [5 <./report-draft-1/snapshots-26/PARTA3CorrectedPropertySatisfied.png>]
+<report-draft-1/snapshots-26/PartB-b2-trafficsys.png, id=92, 851.43094pt x 499.
 8675pt>
 File: report-draft-1/snapshots-26/PartB-b2-trafficsys.png Graphic file (type pn
 g)
 <use report-draft-1/snapshots-26/PartB-b2-trafficsys.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b2-trafficsys.png  u
-sed on input line 325. on input line 325.
+sed on input line 327. on input line 327.
 Package pdftex.def Info: Requested size: 424.05275pt x 248.95683pt on input lin
-e 325.
-<report-draft-1/snapshots-26/PartB-b2-pedsys.png, id=94, 523.9575pt x 336.50719
+e 327.
+<report-draft-1/snapshots-26/PartB-b2-pedsys.png, id=93, 523.9575pt x 336.50719
 pt>
 File: report-draft-1/snapshots-26/PartB-b2-pedsys.png Graphic file (type png)
 <use report-draft-1/snapshots-26/PartB-b2-pedsys.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b2-pedsys.png  used 
-on input line 326. on input line 326.
+on input line 328. on input line 328.
 Package pdftex.def Info: Requested size: 424.05275pt x 272.35365pt on input lin
-e 326.
-<report-draft-1/snapshots-26/PartB-b2-pedinput.png, id=95, 441.90094pt x 258.96
-75pt>
+e 328.
+ [6]
+<report-draft-1/snapshots-26/PartB-b2-pedinput.png, id=102, 441.90094pt x 258.9
+675pt>
 File: report-draft-1/snapshots-26/PartB-b2-pedinput.png Graphic file (type png)
 
 <use report-draft-1/snapshots-26/PartB-b2-pedinput.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b2-pedinput.png  use
-d on input line 327. on input line 327.
+d on input line 329. on input line 329.
 Package pdftex.def Info: Requested size: 173.47545pt x 101.66075pt on input lin
-e 327.
-<report-draft-1/snapshots-26/PartB-b2-receivers.png, id=96, 325.215pt x 166.371
-57pt>
+e 329.
+<report-draft-1/snapshots-26/PartB-b2-receivers.png, id=103, 325.215pt x 166.37
+157pt>
 File: report-draft-1/snapshots-26/PartB-b2-receivers.png Graphic file (type png
 )
 <use report-draft-1/snapshots-26/PartB-b2-receivers.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b2-receivers.png  us
-ed on input line 328. on input line 328.
+ed on input line 330. on input line 330.
 Package pdftex.def Info: Requested size: 173.47545pt x 88.74768pt on input line
- 328.
- [6 <./report-draft-1/snapshots-26/PartB-b2-trafficsys.png> <./report-draft-1/s
+ 330.
+ [7 <./report-draft-1/snapshots-26/PartB-b2-trafficsys.png> <./report-draft-1/s
 napshots-26/PartB-b2-pedsys.png>]
-<report-draft-1/snapshots-26/PartB-b2-checking_deadlock.png, id=105, 842.39719p
+<report-draft-1/snapshots-26/PartB-b2-checking_deadlock.png, id=113, 842.39719p
 t x 143.78719pt>
 File: report-draft-1/snapshots-26/PartB-b2-checking_deadlock.png Graphic file (
 type png)
 <use report-draft-1/snapshots-26/PartB-b2-checking_deadlock.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b2-checking_deadlock
-.png  used on input line 329. on input line 329.
+.png  used on input line 331. on input line 331.
 Package pdftex.def Info: Requested size: 361.40659pt x 61.68906pt on input line
- 329.
-<report-draft-1/snapshots-26/PartB-b3-queries.png, id=106, 820.56563pt x 427.59
+ 331.
+<report-draft-1/snapshots-26/PartB-b3-queries.png, id=114, 820.56563pt x 427.59
 75pt>
 File: report-draft-1/snapshots-26/PartB-b3-queries.png Graphic file (type png)
 <use report-draft-1/snapshots-26/PartB-b3-queries.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b3-queries.png  used
- on input line 358. on input line 358.
+ on input line 360. on input line 360.
 Package pdftex.def Info: Requested size: 443.32452pt x 231.01665pt on input lin
-e 358.
- [7 <./report-draft-1/snapshots-26/PartB-b2-pedinput.png> <./report-draft-1/sna
+e 360.
+ [8 <./report-draft-1/snapshots-26/PartB-b2-pedinput.png> <./report-draft-1/sna
 pshots-26/PartB-b2-receivers.png> <./report-draft-1/snapshots-26/PartB-b2-check
 ing_deadlock.png>]
-<report-draft-1/snapshots-26/PartB-b4-pedsys.png, id=120, 690.32906pt x 395.226
+<report-draft-1/snapshots-26/PartB-b4-pedsys.png, id=127, 690.32906pt x 395.226
 56pt>
 File: report-draft-1/snapshots-26/PartB-b4-pedsys.png Graphic file (type png)
 <use report-draft-1/snapshots-26/PartB-b4-pedsys.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b4-pedsys.png  used 
-on input line 367. on input line 367.
+on input line 369. on input line 369.
 Package pdftex.def Info: Requested size: 395.1414pt x 226.22829pt on input line
- 367.
-<report-draft-1/snapshots-26/PartB-b4-at59_clause.png, id=121, 259.7203pt x 30.
+ 369.
+<report-draft-1/snapshots-26/PartB-b4-at59_clause.png, id=128, 259.7203pt x 30.
 1125pt>
 File: report-draft-1/snapshots-26/PartB-b4-at59_clause.png Graphic file (type p
 ng)
 <use report-draft-1/snapshots-26/PartB-b4-at59_clause.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b4-at59_clause.png  
-used on input line 372. on input line 372.
+used on input line 374. on input line 374.
 Package pdftex.def Info: Requested size: 231.29816pt x 26.81702pt on input line
- 372.
-<report-draft-1/snapshots-26/PartB-b4-at59.png, id=122, 738.50906pt x 24.09pt>
+ 374.
+<report-draft-1/snapshots-26/PartB-b4-at59.png, id=129, 738.50906pt x 24.09pt>
 File: report-draft-1/snapshots-26/PartB-b4-at59.png Graphic file (type png)
 <use report-draft-1/snapshots-26/PartB-b4-at59.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b4-at59.png  used on
- input line 373. on input line 373.
+ input line 375. on input line 375.
 Package pdftex.def Info: Requested size: 231.29816pt x 7.54463pt on input line 
-373.
-<report-draft-1/snapshots-26/PartB-b4-at60_clause.png, id=123, 261.97874pt x 24
+375.
+<report-draft-1/snapshots-26/PartB-b4-at60_clause.png, id=130, 261.97874pt x 24
 .84282pt>
 File: report-draft-1/snapshots-26/PartB-b4-at60_clause.png Graphic file (type p
 ng)
 <use report-draft-1/snapshots-26/PartB-b4-at60_clause.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b4-at60_clause.png  
-used on input line 385. on input line 385.
+used on input line 387. on input line 387.
 Package pdftex.def Info: Requested size: 231.29816pt x 21.93413pt on input line
- 385.
-<report-draft-1/snapshots-26/PartB-b4-at60.png, id=124, 734.745pt x 21.07875pt>
+ 387.
+<report-draft-1/snapshots-26/PartB-b4-at60.png, id=131, 734.745pt x 21.07875pt>
 
 File: report-draft-1/snapshots-26/PartB-b4-at60.png Graphic file (type png)
 <use report-draft-1/snapshots-26/PartB-b4-at60.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b4-at60.png  used on
- input line 386. on input line 386.
+ input line 388. on input line 388.
 Package pdftex.def Info: Requested size: 231.29816pt x 6.63565pt on input line 
-386.
- [8 <./report-draft-1/snapshots-26/PartB-b3-queries.png> <./report-draft-1/snap
-shots-26/PartB-b4-pedsys.png> <./report-draft-1/snapshots-26/PartB-b4-at59_clau
-se.png> <./report-draft-1/snapshots-26/PartB-b4-at59.png>]
-<report-draft-1/snapshots-26/PartB-b5-traffic.png, id=137, 771.63281pt x 505.89
+388.
+
+[9 <./report-draft-1/snapshots-26/PartB-b3-queries.png> <./report-draft-1/snaps
+hots-26/PartB-b4-pedsys.png> <./report-draft-1/snapshots-26/PartB-b4-at59_claus
+e.png> <./report-draft-1/snapshots-26/PartB-b4-at59.png>]
+<report-draft-1/snapshots-26/PartB-b5-traffic.png, id=144, 771.63281pt x 505.89
 pt>
 File: report-draft-1/snapshots-26/PartB-b5-traffic.png Graphic file (type png)
 <use report-draft-1/snapshots-26/PartB-b5-traffic.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b5-traffic.png  used
- on input line 402. on input line 402.
+ on input line 404. on input line 404.
 Package pdftex.def Info: Requested size: 404.7736pt x 265.37236pt on input line
- 402.
-<report-draft-1/snapshots-26/PartB-b5-ped.png, id=138, 621.82312pt x 359.09157p
+ 404.
+<report-draft-1/snapshots-26/PartB-b5-ped.png, id=145, 621.82312pt x 359.09157p
 t>
 File: report-draft-1/snapshots-26/PartB-b5-ped.png Graphic file (type png)
 <use report-draft-1/snapshots-26/PartB-b5-ped.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b5-ped.png  used on 
-input line 403. on input line 403.
+input line 405. on input line 405.
 Package pdftex.def Info: Requested size: 404.7736pt x 233.75194pt on input line
- 403.
-<report-draft-1/snapshots-26/PartB-b5-at60.png, id=139, 740.7675pt x 30.1125pt>
+ 405.
+<report-draft-1/snapshots-26/PartB-b5-at60.png, id=146, 740.7675pt x 30.1125pt>
 
 File: report-draft-1/snapshots-26/PartB-b5-at60.png Graphic file (type png)
 <use report-draft-1/snapshots-26/PartB-b5-at60.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b5-at60.png  used on
- input line 404. on input line 404.
+ input line 406. on input line 406.
 Package pdftex.def Info: Requested size: 265.03296pt x 10.77385pt on input line
- 404.
- [9 <./report-draft-1/snapshots-26/PartB-b4-at60_clause.png> <./report-draft-1/
-snapshots-26/PartB-b4-at60.png> <./report-draft-1/snapshots-26/PartB-b5-traffic
-.png>]
-<report-draft-1/snapshots-26/PartB-b5-at60_clause.png, id=151, 265.74281pt x 26
+ 406.
+ [10 <./report-draft-1/snapshots-26/PartB-b4-at60_clause.png> <./report-draft-1
+/snapshots-26/PartB-b4-at60.png> <./report-draft-1/snapshots-26/PartB-b5-traffi
+c.png>]
+<report-draft-1/snapshots-26/PartB-b5-at60_clause.png, id=158, 265.74281pt x 26
 .34843pt>
 File: report-draft-1/snapshots-26/PartB-b5-at60_clause.png Graphic file (type p
 ng)
 <use report-draft-1/snapshots-26/PartB-b5-at60_clause.png>
 Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b5-at60_clause.png  
-used on input line 405. on input line 405.
+used on input line 407. on input line 407.
 Package pdftex.def Info: Requested size: 265.03296pt x 26.28pt on input line 40
-5.
-<report-draft-1/snapshots-26/PartB-b5-crossed_allow_at60.png, id=152, 2006.4962
-5pt x 29.10875pt>
-File: report-draft-1/snapshots-26/PartB-b5-crossed_allow_at60.png Graphic file 
-(type png)
-<use report-draft-1/snapshots-26/PartB-b5-crossed_allow_at60.png>
-Package pdftex.def Info: report-draft-1/snapshots-26/PartB-b5-crossed_allow_at6
-0.png  used on input line 406. on input line 406.
-Package pdftex.def Info: Requested size: 346.95091pt x 5.03325pt on input line 
-406.
- [10 <./report-draft-1/snapshots-26/PartB-b5-ped.png> <./report-draft-1/snapsho
+7.
+ [11 <./report-draft-1/snapshots-26/PartB-b5-ped.png> <./report-draft-1/snapsho
 ts-26/PartB-b5-at60.png> <./report-draft-1/snapshots-26/PartB-b5-at60_clause.pn
-g> <./report-draft-1/snapshots-26/PartB-b5-crossed_allow_at60.png>] [11]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 446.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 446.
- (./Lab2Report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 446.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 446.
+g>] [12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 432.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 432.
+
+(./Lab2Report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 432.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 432.
 Package rerunfilecheck Info: File `Lab2Report.out' has not changed.
 (rerunfilecheck)             Checksum: 1F22E52597AF47ACC5AAA9378AD59E65;156.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 446.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 432.
  ) 
 Here is how much of TeX's memory you used:
- 29160 strings out of 494917
- 580998 string characters out of 6180699
- 633769 words of memory out of 5000000
- 32062 multiletter control sequences out of 15000+600000
+ 29159 strings out of 494917
+ 581004 string characters out of 6180699
+ 633711 words of memory out of 5000000
+ 32061 multiletter control sequences out of 15000+600000
  538141 words of font info for 52 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  55i,14n,54p,10382b,988s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1326,10 +1330,10 @@ amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on Lab2Report.pdf (11 pages, 805625 bytes).
+Output written on Lab2Report.pdf (12 pages, 834735 bytes).
 PDF statistics:
- 243 PDF objects out of 1000 (max. 8388607)
- 165 compressed objects within 2 object streams
+ 241 PDF objects out of 1000 (max. 8388607)
+ 162 compressed objects within 2 object streams
  60 named destinations out of 1000 (max. 500000)
  149 words of extra memory for PDF output out of 10000 (max. 10000000)
 
