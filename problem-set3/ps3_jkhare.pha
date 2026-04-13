@@ -1,0 +1,77 @@
+// ----------------------------------------------------------
+// Hybrid System Example: Phaver model of sys1 T.A. from problem set 3
+// ----------------------------------------------------------
+
+// ----------------------------------------------------------
+// System Description
+// ----------------------------------------------------------
+automaton sys1
+
+        contr_var: x,y;  // the two variables of the automaton
+        synclabs: a;     // don't need to change this, "a" is a label for transitions
+
+        // --------------------------------------------------
+        // This comment block explains the three lines after the comment. Read carefully!
+        // 
+        // loc locA: while x<=3 & y<=3 wait {x' == 1 & y' == 1}
+        //   ... first location is named locA
+        //   ... x<=3 & y<=3 is the location invariant for locA
+        //   ... while waiting in locA, derivative of x and y are both 1.
+        //	
+        //   when x>= 1 sync a do{x'==0 & y'==0} goto locA;
+        //     ... define jump transition from locA with guard condition x>=1
+        //     ... if jump occurs, x and y are set to 0, and sys1 goes back to locA
+        //     ... NOTE: x' and y' on the jump refer to updates, not derivatives
+        //
+        //   when x < 1 sync a do{x'==x & y'==y} goto locB;
+        //     ... define jump transition from locA with guard condition x<1
+        //     ... if jump occurs, vars x and y are unchanged, and sys1 goes to locB
+        //     ... NOTE: unchanged vars are set to own values (e.g. x'==x), not omitted
+        // --------------------------------------------------
+        loc locA: while x<=3 & y<=3 wait {x' == 1 & y' == 1};
+              when x>= 1 sync a do{x'==0 & y'==0} goto locA;
+              when x < 1 sync a do{x'==x & y'==y} goto locB;
+        loc locB: while x<=3 & y<=3 wait {x' == 1 & y' == 1};
+              when x>=1 sync a do {x'==0 & y'==y} goto locB;
+              when y>0  sync a do {x'==x & y'==y} goto locA;
+
+        // --------------------------------------------------
+        // initial state of automaton is location locA with x and y both at 0
+        // --------------------------------------------------
+        initially: locA & x == 0 & y == 0;
+end
+
+// ----------------------------------------------------------
+// Define Partitioning
+// ----------------------------------------------------------
+// don't need to change this. "tau" is a label for transitions between partitions.
+sys1.add_label(tau);
+
+// controls the size of the partitions (i.e. the level of abstraction)
+pc:=0.2;
+
+// set up partitioning of state space for the two variables x and y
+sys1.set_refine_constraints((x,pc),(y,pc),tau);
+
+
+
+// ----------------------------------------------------------
+// Saving Data for Graphical Output
+// ----------------------------------------------------------
+reg=sys1.reachable;            // the reachable parts of state space of example
+reg.print("out_reachable",2);  // output as a list of vertices
+
+inv=sys1.get_invariants;       // the grid of partitions explored
+inv.print("out_inv",2);        // output as a list of vertices
+
+// ----------------------------------------------------------
+// Analysis Commands
+// ----------------------------------------------------------
+cond1=sys1.{locA & x==1 & y==2}; 
+check1=sys1.is_reachable(cond1);    // can we reach locA with x==1 and y==2?
+
+cond2=sys1.{locA & x==2 & y==1};
+check2=sys1.is_reachable(cond2);    // can we reach locA with x==2 and y==1?
+
+cond3=sys1.{locB & x==1 & y==3};
+check3=sys1.is_reachable(cond3); 

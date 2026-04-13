@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.6//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_6.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+</declaration>
+	<template>
+		<name x="5" y="5">sys1</name>
+		<declaration>// Place local declarations here.
+
+clock x, y; 	//local clocks x and y</declaration>
+		<location id="id0" x="-59" y="-102">
+			<name x="-76" y="-136">locB</name>
+			<label kind="invariant" x="-102" y="-93">x&lt;=3 &amp;&amp; y&lt;=3</label>
+		</location>
+		<location id="id1" x="-289" y="-102">
+			<name x="-306" y="-136">locA</name>
+			<label kind="invariant" x="-340" y="-85">x&lt;=3 &amp;&amp; y&lt;=3</label>
+		</location>
+		<init ref="id1"/>
+		<transition id="id2">
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-195" y="-102">y &gt; 0</label>
+			<nail x="-170" y="-102"/>
+		</transition>
+		<transition id="id3">
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-187" y="-195">x&lt;1</label>
+			<nail x="-178" y="-178"/>
+		</transition>
+		<transition id="id4">
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="guard" x="33" y="-149">x&gt;=1</label>
+			<label kind="assignment" x="34" y="-127">x=0</label>
+			<nail x="25" y="-187"/>
+			<nail x="25" y="-85"/>
+		</transition>
+		<transition id="id5">
+			<source ref="id1"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-442" y="-153">x&gt;=1</label>
+			<label kind="assignment" x="-459" y="-136">x=0, y=0</label>
+			<nail x="-391" y="-93"/>
+			<nail x="-391" y="-178"/>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+
+// List one or more processes to be composed into a system.
+system sys1;</system>
+	<queries>
+		<option key="--diagnostic" value="1"/>
+		<query>
+			<formula>E&lt;&gt; (sys1.locA and sys1.x == 2 and sys1.y == 1)</formula>
+			<comment/>
+			<result outcome="failure" type="quality" timestamp="2026-04-01 14:47:51 -0400">
+				<option key="--diagnostic" value="1"/>
+			</result>
+		</query>
+		<query>
+			<formula>E&lt;&gt; (sys1.locA and sys1.x == 1 and sys1.y == 2)</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2026-04-01 14:47:47 -0400">
+				<option key="--diagnostic" value="1"/>
+			</result>
+		</query>
+		<query>
+			<formula>E&lt;&gt; (sys1.locB and sys1.x == 1 and sys1.y == 3)</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2024-04-04 23:27:34 -0400">
+				<option key="--diagnostic" value="1"/>
+			</result>
+		</query>
+	</queries>
+</nta>
