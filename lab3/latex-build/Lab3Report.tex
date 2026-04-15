@@ -1,0 +1,226 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper, tmargin=0.75in, lmargin=0.80in, rmargin=0.80in, bmargin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{listings}
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IMAGE TOGGLE + SNAPSHOT PATH
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newif\ifshowimages
+% Out-of-the-box: placeholders compile without PNGs. For final PDF with plots,
+% set \showimagestrue (or build with: make without-images toggles \NOIMAGES).
+\showimagesfalse
+\ifdefined\NOIMAGES
+  \showimagesfalse
+\fi
+\graphicspath{{report-draft-1/snapshots/}{figures/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PHAVer / tool listing style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstdefinestyle{phaver}{
+  basicstyle=\ttfamily\small,
+  columns=fullflexible,
+  breaklines=true,
+  frame=single,
+  showstringspaces=false,
+  aboveskip=0.5\baselineskip,
+  belowskip=0.5\baselineskip,
+  literate={_}{{\_}}1
+}
+
+\newcommand{\studentname}{Jaideep Khare and Shu-Lin Shih}
+\newcommand{\studentnumber}{35193853 and 35199856}
+\newcommand{\coursename}{ECE 622: Modeling \& Verification of Embedded Systems}
+\newcommand{\semester}{Spring 2026}
+
+\newcommand{\afterprompt}{\par\medskip}
+
+%% Optional width as fraction of \textwidth (default 0.82)
+\newcommand{\labfigure}[4][0.82]{%
+\begin{figure}[H]
+\centering
+\ifshowimages
+  \includegraphics[width=#1\textwidth]{#2}
+\else
+  \fbox{\begin{minipage}[c][45mm][c]{0.90\textwidth}
+  \centering
+  Image omitted in no-image build\\
+  \texttt{\detokenize{#2}}
+  \end{minipage}}
+\fi
+\caption{#3}
+\label{#4}
+\end{figure}
+}
+
+\begin{document}
+
+\begin{center}
+{\huge{\coursename}} \\
+\vspace{2mm}
+{\Large{\semester: Lab 3: Hybrid Systems Verification}}\\
+\vspace{1mm}
+{\Large{Prof. Daniel Holcomb}}
+\end{center}
+
+\vspace{5mm}
+\hrule
+\vspace{1mm}
+\hrule
+
+\vspace{3mm}
+\begin{tabular}{ll}
+Submitted by:   & {\studentname} \\
+Student ID:      & {\studentnumber} \\
+Lab No.:         & 3 \\
+Submission Date: & 14th April, 2026 \\
+\end{tabular}
+
+\vspace{3mm}
+\hrule
+\vspace{1mm}
+\hrule
+
+\section*{Overview}
+This report documents reachability analysis for hybrid models using \textbf{PHAVerLite}, following Lab~3. Hybrid systems combine continuous flows per location with discrete jumps; PHAVerLite uses a piecewise over-approximation of the dynamics so that unreachability results are sound for the concrete model, while reachability of a target in the abstraction does not imply reachability in the original system \citep{Frehse2008STTT}.
+
+The workflow in each part was: (1) obtain or build a \texttt{.pha} model, (2) set partition constraint \texttt{pc} and location invariants to bound the search, (3) compute reachable sets and/or run \texttt{is\_reachable} checks, and (4) relate plots and tool output to the lab questions.
+
+\section{Part A: Analysis of Bouncing Ball Model}
+
+\subsection*{A.1: Reachable sets for two values of \texttt{pc}}
+\textit{Use PHAVerLite to compute reachable states with \texttt{pc=0.5} and \texttt{pc=0.05}. Plot both on the same axes (clearly distinguishable). Answer: for each \texttt{pc}, is $(x,v)=(0.55,0.0)$ unreachable based on the plot?}
+\afterprompt
+\labfigure[0.85]{a1_reachable_pc_overlay.png}{A.1: Reachable states for \texttt{pc=0.05} overlaid on \texttt{pc=0.5} (replace filename after exporting the plot).}{fig:a1_overlay}
+
+\noindent\textbf{Interpretation (plot).}
+\begin{itemize}
+\item For \texttt{pc=0.5}: (fill in after inspection.)
+\item For \texttt{pc=0.05}: (fill in after inspection.)
+\end{itemize}
+
+\subsection*{A.2: \texttt{is\_reachable} vs.\ plot; sweep \texttt{pc}}
+\textit{Verify $(0.55,0.0)$ with \texttt{is\_reachable} for \texttt{pc=0.5} and \texttt{0.05} (consistency with A.1).}
+\textit{Then sweep \texttt{pc} over $0.5$, $0.2$, $0.1$, $0.05$, $0.01$, and $0.005$. If any run exceeds 15 minutes, report time as ``timed out.''}
+\afterprompt
+Example command form (adjust names to your model):
+\begin{lstlisting}[style=phaver]
+check = bball.is_reachable(target);
+\end{lstlisting}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c c c c}
+\toprule
+Partition \texttt{pc} & Condition reachable? & Num locations reached & CPU time (\si{s}) \\
+\midrule
+0.5   & --- & --- & --- \\
+0.2   & --- & --- & --- \\
+0.1   & --- & --- & --- \\
+0.05  & --- & --- & --- \\
+0.01  & --- & --- & --- \\
+0.005 & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\caption{A.2 reachability sweep (fill from PHAVerLite output).}
+\label{tab:a2_pc_sweep}
+\end{table}
+
+\noindent\textit{Follow-up (no extra runs).} If you repeated the reachability check for \texttt{pc=1.0}, \texttt{pc=0.075}, and \texttt{pc=0.001}, which case(s) would \emph{definitely} report the target unreachable? Answer from soundness of unreachability under over-approximation and the table above.
+
+\medskip
+\noindent(Write-up goes here.)
+
+\subsection*{A.3: Bounce counter \texttt{n} and peak-height queries}
+\textit{Fix \texttt{pc=0.05}. Discuss whether peak height exactly $0.15$ on bounces 1--4 appears consistent with the reachable set plot. Add variable \texttt{n} (init, derivatives per location, resets on jumps). Enforce \texttt{n}$\leq 10$ via an invariant. Add four \texttt{is\_reachable} checks \texttt{n1}\ldots\texttt{n4} for $(x,v)=(0.15,0)$ on each bounce. Submit \texttt{<lastname>\_A3.pha}.}
+\afterprompt
+\begin{lstlisting}[style=phaver]
+check = bball.is_reachable(n1);
+check = bball.is_reachable(n2);
+check = bball.is_reachable(n3);
+check = bball.is_reachable(n4);
+\end{lstlisting}
+
+\noindent\textbf{Results vs.\ plot:} (fill in.)
+
+\section{Part B: Model of Heating System}
+
+\subsection*{B.1: Reachable set with \texttt{pc=0.3}}
+\textit{Encode the heating model in PHAVer syntax. Add a clock \texttt{t} (init 0, derivative 1 in both locations, value retained across jumps). Enforce $0\leq t\leq 10$ in both locations. Plot reachable states: $x$-axis time, $y$-axis temperature.}
+\afterprompt
+\labfigure[0.85]{b1_heating_reachable_t_x.png}{B.1: Reachable states (time vs.\ temperature) at \texttt{pc=0.3}.}{fig:b1_heating}
+
+\subsection*{B.2: Time-bounded temperature property}
+\textit{From initial \((\text{cool}, t{=}0, x{=}22)\), show temperature goes below \SI{20}{\celsius} within \SI{0.98}{\second}. Use a counterexample region with \texttt{t==0.98} (not \texttt{t>=0.98}). Find the largest \texttt{pc} (within \SI{0.1}{} of the true threshold) for which the bad set is unreachable. Submit \texttt{<lastname>\_B2.pha}.}
+\afterprompt
+\noindent\textbf{Largest \texttt{pc} found:} ---\\
+\noindent\textbf{Search method:} (e.g.\ bisection / bracketing between reachable and unreachable \texttt{pc}.)
+
+\section{Part C: Car Acceleration and Braking}
+
+\noindent\textit{Scenario: two intersections \SI{500}{\meter} apart; stop sign then traffic light. Full stop at sign; accelerate at \SI{3.5}{\meter\per\second\squared}. Braking for red light starts between \SI{250}{\meter} and \SI{300}{\meter} past the stop sign (i.e.\ \SI{200}{\meter}--\SI{250}{\meter} from the light). Braking acceleration \SI{-5.5}{\meter\per\second\squared} until stop.}
+
+\subsection*{C.1: Hybrid automaton diagram}
+\textit{Circle locations; label guards on jumps; derivatives of position and velocity per location; location invariants (including to force transitions when guards stay true).}
+\afterprompt
+\labfigure[0.75]{c1_car_hybrid_diagram.png}{C.1: Hybrid automaton sketch (or export from notes).}{fig:c1_diagram}
+
+\subsection*{C.2: PHAVer model and reachable set}
+\textit{Translate to PHAVer. Use reasonable invariants to bound the state space. With \texttt{pc=3.0}, plot reachable states: position ($x$-axis) vs.\ velocity ($y$-axis).}
+\afterprompt
+\labfigure[0.85]{c2_car_reachable_x_v.png}{C.2: Reachable states in the $(x,v)$ plane at \texttt{pc=3.0}.}{fig:c2_reachable}
+
+\subsection*{C.3: Three reachability properties}
+\textit{For each property below, give the exact \texttt{is\_reachable(...)} query, include one screenshot with PHAVerLite text output for all three checks, and explain why unreachability (or the appropriate abstraction argument) proves the property true/false. Submit \texttt{<lastname>\_C3.pha}.}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{p{0.42\textwidth} p{0.50\textwidth}}
+\toprule
+Property & Summary \\
+\midrule
+1 & The car will definitely stop before it reaches the 2nd intersection. \\
+2 & The velocity cannot be above \SI{46.5}{\meter\per\second} while braking. \\
+3 & The velocity cannot be above \SI{40.0}{\meter\per\second} while braking. \\
+\bottomrule
+\end{tabular}
+\caption{C.3 properties (from lab handout).}
+\label{tab:c3_properties}
+\end{table}
+
+\labfigure[0.92]{c3_phaverlite_output_three_checks.png}{C.3: PHAVerLite output for the three \texttt{is\_reachable} queries.}{fig:c3_output}
+
+\subsection*{C.4 (ECE 622 only): 0--60\,MPH time estimate}
+\textit{Add a time variable; \SI{60}{mph} \(=\) \SI{26.8}{\meter\per\second}. Use \texttt{pc=3.0}. Two queries: (i) \SI{26.8}{\meter\per\second} unreachable by time $T$; (ii) reachable by time $T+\SI{0.1}{\second}$. Report an interval for 0--60 time. Submit \texttt{<lastname>\_C4.pha}.}
+\afterprompt
+\noindent\textbf{Estimated 0--60 interval:} ---
+
+\section*{Conclusion}
+Summarize how coarser vs.\ finer \texttt{pc} affected precision and runtime in Parts A--B, and how over-approximation guided the safety arguments in Part~C.
+
+\appendix
+\section*{Appendix: Tooling and submission artifacts}
+This report template was adapted from the Lab~2 \texttt{latex-build} layout. Build with \texttt{latexmk} (see \texttt{README.md}). PHAVerLite models and plots were produced on the course toolchain; figures can be synced via Git alongside this \texttt{.tex} file.
+
+\textbf{Files to submit (replace \texttt{<lastname>} per handout):}
+\begin{itemize}
+\item \texttt{<lastname>\_A3.pha}
+\item \texttt{<lastname>\_B2.pha}
+\item \texttt{<lastname>\_C3.pha}
+\item \texttt{<lastname>\_C4.pha} (ECE~622 only)
+\end{itemize}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

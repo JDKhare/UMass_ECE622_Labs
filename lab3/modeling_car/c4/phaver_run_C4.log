@@ -1,0 +1,28 @@
+PHAVerLite 0.7: starting
+  Parsing file jkhare_C4.pha
+  Computing reachable states of car_c4
+  Time in get_reach_set: 0.742 secs
+
+  Printing symb. states in 182 locations in generator floating point raw format.
+  ------------------------------------------------------------------------------
+
+
+  Time in print_gen_fp_raw: 0.013 secs
+  ------------------------------------
+
+
+  Printing symb. states in 379 locations in generator floating point raw format.
+  ------------------------------------------------------------------------------
+
+
+  Time in print_gen_fp_raw: 0.011 secs
+  ------------------------------------
+
+  Computing reachable states of car_c4
+  Time in get_reach_set: 0.108 secs
+q_before not reachable.
+  Computing reachable states of car_c4
+  Time in get_reach_set: 0.083 secs
+q_after is reachable.
+  Time in file jkhare_C4.pha: 0.960 secs
+Time in PHAVerLite: 0.960 secs

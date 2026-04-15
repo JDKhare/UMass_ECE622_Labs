@@ -1,0 +1,31 @@
+PHAVerLite 0.7: starting
+  Parsing file ps3_jkhare.pha
+  Computing reachable states of sys1
+  Time in get_reach_set: 0.450 secs
+
+  Printing symb. states in 246 locations in generator floating point raw format.
+  ------------------------------------------------------------------------------
+
+
+  Time in print_gen_fp_raw: 0.003 secs
+  ------------------------------------
+
+
+  Printing symb. states in 336 locations in generator floating point raw format.
+  ------------------------------------------------------------------------------
+
+
+  Time in print_gen_fp_raw: 0.005 secs
+  ------------------------------------
+
+  Computing reachable states of sys1
+  Time in get_reach_set: 0.073 secs
+cond1 is reachable.
+  Computing reachable states of sys1
+  Time in get_reach_set: 0.100 secs
+cond2 not reachable.
+  Computing reachable states of sys1
+  Time in get_reach_set: 0.057 secs
+cond3 is reachable.
+  Time in file ps3_jkhare.pha: 0.689 secs
+Time in PHAVerLite: 0.689 secs

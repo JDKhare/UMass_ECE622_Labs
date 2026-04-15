@@ -1,0 +1,57 @@
+// ----------------------------------------------------------
+// Lab 3 Part C.4 Quick Model: 0--60 mph timing probes
+// Lightweight version focused on t in [0, 5] seconds.
+// ----------------------------------------------------------
+
+automaton car_c4
+
+        // x = position (m), v = speed (m/s), t = time (s)
+        contr_var: x,v,t;
+        synclabs: mode_switch;
+
+        // Accelerate from stop
+        loc Accel: while v <= 35 & t <= 5 wait {x' == v & v' == 3.5 & t' == 1};
+              when v >= 24 sync mode_switch do{x'==x & v'==v & t'==t} goto Cruise;
+
+        // Optional short cruise (kept for hybrid structure consistency)
+        loc Cruise: while v >= 0 & v <= 35 & t <= 5 wait {x' == v & v' == 0 & t' == 1};
+              when x >= 280 sync mode_switch do{x'==x & v'==v & t'==t} goto Brake;
+
+        // Brake branch (usually not entered before t=5 in this quick model)
+        loc Brake: while v >= 0 & t <= 5 wait {x' == v & v' == -5.5 & t' == 1};
+              when v <= 0 sync mode_switch do{x'==x & v'==0 & t'==t} goto Stop;
+
+        loc Stop: while v == 0 & t <= 5 wait {x' == 0 & v' == 0 & t' == 1};
+
+        initially: Accel & x == 0 & v == 0 & t == 0;
+end
+
+// Partitioning tuned to keep runtime reasonable
+car_c4.add_label(tau);
+pc_x:=6.0;
+pc_v:=2.0;
+pc_t:=0.5;
+car_c4.set_refine_constraints((x,pc_x),(v,pc_v),(t,pc_t),tau);
+
+// Reachable-set outputs (optional but useful for inspection)
+reg=car_c4.reachable;
+reg.print("out_reachable_c4",2);
+
+inv=car_c4.get_invariants;
+inv.print("out_inv_c4",2);
+
+// ----------------------------------------------------------
+// C.4 timing probes
+// 60 mph ~= 26.8 m/s
+// ----------------------------------------------------------
+p1=car_c4.{Accel & t >= 3 & t <= 4 & v >= 0};
+c1=car_c4.is_reachable(p1);
+
+p2=car_c4.{Accel & t >= 3 & t <= 4 & v >= 26.8};
+c2=car_c4.is_reachable(p2);
+
+p3=car_c4.{Accel & t <= 3 & v >= 26.8};
+c3=car_c4.is_reachable(p3);
+
+p4=car_c4.{Accel & t <= 4 & v >= 26.8};
+c4=car_c4.is_reachable(p4);
