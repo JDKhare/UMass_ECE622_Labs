@@ -1,13 +1,15 @@
 # Fdb version 3
-["bibtex Lab3Report"] 1776221557 "Lab3Report.aux" "Lab3Report.bbl" "Lab3Report" 1776221557
+["bibtex Lab3Report"] 0 "Lab3Report.aux" "Lab3Report.bbl" "Lab3Report" 1776225488
   "/usr/share/texlive/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1480098435 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "Lab3Report.aux" 1776221557 4093 9b782c63f817805d225045b4736bb2e9 "pdflatex"
+  "Lab3Report.aux" 1776225488 4396 16b074f814fe6e5263fbeee433f7eaa2 "pdflatex"
   "references.bib" 1776216200 335 eee52ae3ac68612b99f068ca9b8fb211 ""
   (generated)
-  "Lab3Report.blg"
   "Lab3Report.bbl"
-["pdflatex"] 1776221557 "Lab3Report.tex" "Lab3Report.pdf" "Lab3Report" 1776221557
+  "Lab3Report.blg"
+["pdflatex"] 1776225488 "/home/ece558_658_2025/jkhare/UMass_ECE622_Labs/lab3/latex-build/Lab3Report.tex" "/home/ece558_658_2025/jkhare/UMass_ECE622_Labs/lab3/latex-build/Lab3Report.pdf" "Lab3Report" 1776225488
   "/home/ece558_658_2025/jkhare/.texlive2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1774298802 734105 98ed08bed78ed7b1f57a578fb44e5c41 ""
+  "/home/ece558_658_2025/jkhare/UMass_ECE622_Labs/lab3/latex-build/Lab3Report.aux" 1776225488 4396 16b074f814fe6e5263fbeee433f7eaa2 ""
+  "/home/ece558_658_2025/jkhare/UMass_ECE622_Labs/lab3/latex-build/Lab3Report.tex" 1776225487 23658 3fb5b3794d8abbd760792ab3d09ced0f ""
   "/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map" 1505175693 2409932 f79b4f632000ddea55e8f74cd4f9d531 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm" 1480098698 996 a18840b13b499c08ac2de96a99eda4bc ""
@@ -179,10 +181,10 @@
   "/usr/share/texlive/texmf-dist/tex/latex/url/url.sty" 1480098842 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty" 1480098843 55589 34128738f682d033422ca125f82e5d62 ""
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1685187888 33426 b47e9bbe185cb2dc23aef33961dc9e4b ""
-  "Lab3Report.aux" 1776221557 4093 9b782c63f817805d225045b4736bb2e9 "pdflatex"
-  "Lab3Report.bbl" 1776221557 576 3ca0d88bbb373eb81f4919f574a463c9 "bibtex Lab3Report"
-  "Lab3Report.out" 1776221557 211 c59d71f8864e97ea5fc453aeccb47e71 "pdflatex"
-  "Lab3Report.tex" 1776221549 21097 b63e6c6ef1e5c4dbb70e1af17f28f33b ""
+  "Lab3Report.aux" 1776225488 4396 16b074f814fe6e5263fbeee433f7eaa2 "pdflatex"
+  "Lab3Report.bbl" 1776224726 576 3ca0d88bbb373eb81f4919f574a463c9 "bibtex Lab3Report"
+  "Lab3Report.out" 1776225488 211 c59d71f8864e97ea5fc453aeccb47e71 "pdflatex"
+  "Lab3Report.tex" 1776225487 23658 3fb5b3794d8abbd760792ab3d09ced0f ""
   "figures/a1_phaver_graph.png" 1776218631 10480 fe87ca69cb4c15f550eeacd769f7b0b4 ""
   "figures/a3_phaver_graph.jpg" 1776218631 44635 9cccd90504b2244d116df8a98c865b2b ""
   "figures/a3_terminal_output.jpg" 1776218631 110376 d5b518f1070749714c83ba2a673dacc9 ""
@@ -191,5 +193,7 @@
   (generated)
   "Lab3Report.pdf"
   "Lab3Report.out"
+  "/home/ece558_658_2025/jkhare/UMass_ECE622_Labs/lab3/latex-build/Lab3Report.log"
+  "/home/ece558_658_2025/jkhare/UMass_ECE622_Labs/lab3/latex-build/Lab3Report.pdf"
   "Lab3Report.aux"
   "Lab3Report.log"
