@@ -1,12 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2026.3.23)  14 APR 2026 22:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2026.3.23)  14 APR 2026 22:21
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
-**Lab3Report.tex
-(./Lab3Report.tex
-LaTeX2e <2017-04-15>
-Babel <3.17> and hyphenation patterns for 3 language(s) loaded.
-(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+**\def\NOIMAGES{1}\input{Lab3Report.tex}
+(./Lab3Report.tex (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
@@ -958,44 +956,23 @@ File: pgflibraryarrows.meta.code.tex 2015/05/13 v3.0.1a (rcs-revision 1.13)
 \pgfarrowlength=\dimen291
 \pgfarrowwidth=\dimen292
 \pgfarrowlinewidth=\dimen293
-) (/usr/share/texlive/texmf-dist/tex/latex/overpic/overpic.sty
-Package: overpic 2017/10/06 1.0 picture overlays
+) (./Lab3Report-noimg.aux)
+\openout1 = `Lab3Report-noimg.aux'.
 
-(/usr/share/texlive/texmf-dist/tex/latex/eepic/epic.sty
-Enhancements to Picture Environment. Version 1.2 - Released June 1, 1986
-\@@multicnt=\count317
-\d@lta=\count318
-\@delta=\dimen294
-\@@delta=\dimen295
-\@gridcnt=\count319
-\@joinkind=\count320
-\@dotgap=\dimen296
-\@ddotgap=\dimen297
-\@x@diff=\count321
-\@y@diff=\count322
-\x@diff=\dimen298
-\y@diff=\dimen299
-\@dotbox=\box86
-\num@segments=\count323
-\num@segmentsi=\count324
-\@datafile=\read3
-)) (./Lab3Report.aux)
-\openout1 = `Lab3Report.aux'.
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1031,23 +1008,23 @@ LaTeX Font Info:    ... okay on input line 69.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box87
-Package hyperref Info: Link coloring OFF on input line 69.
+\AtBeginShipoutBox=\box86
+Package hyperref Info: Link coloring OFF on input line 68.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count325
+\c@section@level=\count317
 )
-LaTeX Info: Redefining \ref on input line 69.
-LaTeX Info: Redefining \pageref on input line 69.
-LaTeX Info: Redefining \nameref on input line 69.
+LaTeX Info: Redefining \ref on input line 68.
+LaTeX Info: Redefining \pageref on input line 68.
+LaTeX Info: Redefining \nameref on input line 68.
 
-(./Lab3Report.out) (./Lab3Report.out)
+(./Lab3Report-noimg.out) (./Lab3Report-noimg.out)
 \@outlinefile=\write4
-\openout4 = `Lab3Report.out'.
+\openout4 = `Lab3Report-noimg.out'.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary
@@ -1059,16 +1036,16 @@ File: siunitx-abbreviations.cfg 2017/11/26 v2.7k siunitx: Abbreviated units
 )
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count326
-\scratchdimen=\dimen300
-\scratchbox=\box88
-\nofMPsegments=\count327
-\nofMParguments=\count328
+\scratchcounter=\count318
+\scratchdimen=\dimen294
+\scratchbox=\box87
+\nofMPsegments=\count319
+\nofMParguments=\count320
 \everyMPshowfont=\toks37
-\MPscratchCnt=\count329
-\MPscratchDim=\dimen301
-\MPnumerator=\count330
-\makeMPintoPDFobject=\count331
+\MPscratchCnt=\count321
+\MPscratchDim=\dimen295
+\MPnumerator=\count322
+\makeMPintoPDFobject=\count323
 \everyMPtoPDFconversion=\toks38
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1087,163 +1064,122 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count332
+\c@lstlisting=\count324
 
 ABD: EveryShipout initializing macros
-\c__siunitx_mathsf_int=\count333
-\c__siunitx_mathtt_int=\count334
+\c__siunitx_mathsf_int=\count325
+\c__siunitx_mathtt_int=\count326
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 104.
-<figures/a1_phaver_graph.png, id=21, 572.1375pt x 572.1375pt>
-File: figures/a1_phaver_graph.png Graphic file (type png)
-<use figures/a1_phaver_graph.png>
-Package pdftex.def Info: figures/a1_phaver_graph.png  used on input line 107. o
-n input line 107.
-Package pdftex.def Info: Requested size: 346.95091pt x 346.95178pt on input lin
-e 107.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 103.
  [1
 
-{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}] [2pdfTeX wa
-rning (ext4): destination with the same identifier (name{figure.1}) has been al
-ready used, duplicate ignored
+{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}pdfTeX warnin
+g (ext4): destination with the same identifier (name{figure.1}) has been alread
+y used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.143 \noindent
-                The sweep shows the expected precision-runtime tradeoff: as ...
-pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
- been already used, duplicate ignored
+l.116 E
+       xample command form (adjust names to your model):] [2pdfTeX warning (ext
+4): destination with the same identifier (name{table.1}) has been already used,
+ duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.143 \noindent
-                The sweep shows the expected precision-runtime tradeoff: as ...
- <./figures/a1_phaver_graph.png (PNG copy)>]
-<figures/a3_phaver_graph.jpg, id=50, 572.1375pt x 572.1375pt>
-File: figures/a3_phaver_graph.jpg Graphic file (type jpg)
-<use figures/a3_phaver_graph.jpg>
-Package pdftex.def Info: figures/a3_phaver_graph.jpg  used on input line 150. o
-n input line 150.
-Package pdftex.def Info: Requested size: 337.31134pt x 337.31375pt on input lin
-e 150.
-<figures/a3_terminal_output.jpg, id=51, 641.39626pt x 450.68375pt>
-File: figures/a3_terminal_output.jpg Graphic file (type jpg)
-<use figures/a3_terminal_output.jpg>
-Package pdftex.def Info: figures/a3_terminal_output.jpg  used on input line 157
-. on input line 157.
-Package pdftex.def Info: Requested size: 375.86226pt x 264.10623pt on input lin
-e 157.
- [3pdfTeX warning (ext4): destination with the same identifier (name{figure.2})
- has been already used, duplicate ignored
+l.157 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.158 
-       <./figures/a3_phaver_graph.jpg>]
-<figures/b1_phaver_state_graph.png, id=64, 783.67781pt x 733.99219pt>
-File: figures/b1_phaver_state_graph.png Graphic file (type png)
-<use figures/b1_phaver_state_graph.png>
-Package pdftex.def Info: figures/b1_phaver_state_graph.png  used on input line 
-170. on input line 170.
-Package pdftex.def Info: Requested size: 385.50183pt x 361.0593pt on input line
- 170.
- [4pdfTeX warning (ext4): destination with the same identifier (name{figure.3})
- has been already used, duplicate ignored
+l.157 
+      ] [3pdfTeX warning (ext4): destination with the same identifier (name{fig
+ure.3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.171 \noindent
-                We implemented the clocked hybrid model and plotted the reac...
- <./figures/a3_terminal_output.jpg>] [5pdfTeX warning (ext4): destination with 
-the same identifier (name{figure.4}) has been already used, duplicate ignored
+l.180 bad 
+          = heatingsystem.{$ & t == 98/100 & x > 20};pdfTeX warning (ext4): des
+tination with the same identifier (name{figure.4}) has been already used, dupli
+cate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.192 \subsection
-                 *{C.1: Hybrid automaton diagram} <./figures/b1_phaver_state_gr
-aph.png>]
-<figures/c2_car_reachable_x_v.jpg, id=86, 770.88pt x 770.88pt>
-File: figures/c2_car_reachable_x_v.jpg Graphic file (type jpg)
-<use figures/c2_car_reachable_x_v.jpg>
-Package pdftex.def Info: figures/c2_car_reachable_x_v.jpg  used on input line 2
-64. on input line 264.
-Package pdftex.def Info: Requested size: 409.59708pt x 409.58781pt on input lin
-e 264.
- [6pdfTeX warning (ext4): destination with the same identifier (name{figure.5})
- has been already used, duplicate ignored
+l.180 bad 
+          = heatingsystem.{$ & t == 98/100 & x > 20};] [4pdfTeX warning (ext4):
+ destination with the same identifier (name{figure.5}) has been already used, d
+uplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.271 
+l.234 
       ]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 293.
- [7pdfTeX warning (ext4): destination with the same identifier (name{figure.6})
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 256.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 267.
+ [5pdfTeX warning (ext4): destination with the same identifier (name{figure.6})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.299 p3_
-         bad = car_sys.{Brake & v >= 40.0};pdfTeX warning (ext4): destination w
-ith the same identifier (name{table.2}) has been already used, duplicate ignore
-d
+l.282 q_
+        after  = car_c4.{Accel & t <= 7.7 & v >= 26.8};pdfTeX warning (ext4): d
+estination with the same identifier (name{table.2}) has been already used, dupl
+icate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.299 p3_
-         bad = car_sys.{Brake & v >= 40.0}; <./figures/c2_car_reachable_x_v.jpg
->]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 304.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 341.
+l.282 q_
+        after  = car_c4.{Accel & t <= 7.7 & v >= 26.8};]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 300.
 
- (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 341.
- [8]
-(./Lab3Report.bbl) [9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 350.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 350.
- (./Lab3Report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 350.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 350.
-Package rerunfilecheck Info: File `Lab3Report.out' has not changed.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 300.
+
+(./Lab3Report-noimg.bbl) [6]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 309.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 309.
+ (./Lab3Report-noimg.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 309.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 309.
+Package rerunfilecheck Info: File `Lab3Report-noimg.out' has not changed.
 (rerunfilecheck)             Checksum: C59D71F8864E97EA5FC453AECCB47E71;211.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 350.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 309.
  ) 
 Here is how much of TeX's memory you used:
- 29094 strings out of 494917
- 589450 string characters out of 6180699
- 693864 words of memory out of 5000000
- 31987 multiletter control sequences out of 15000+600000
+ 28929 strings out of 494917
+ 586968 string characters out of 6180699
+ 689975 words of memory out of 5000000
+ 31841 multiletter control sequences out of 15000+600000
  539476 words of font info for 56 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 55i,23n,76p,10382b,2145s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,20n,76p,10406b,2145s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmtt9.pfb>
-Output written on Lab3Report.pdf (9 pages, 949286 bytes).
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on Lab3Report-noimg.pdf (6 pages, 235953 bytes).
 PDF statistics:
- 220 PDF objects out of 1000 (max. 8388607)
- 181 compressed objects within 2 object streams
- 65 named destinations out of 1000 (max. 500000)
- 62 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 190 PDF objects out of 1000 (max. 8388607)
+ 162 compressed objects within 2 object streams
+ 62 named destinations out of 1000 (max. 500000)
+ 37 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,13 @@
+PHAVerLite 0.7: starting
+  Parsing file jkhare_C3_pc12.pha
+  Computing reachable states of car_sys
+  Time in get_reach_set: 23.230 secs
+p1_bad not reachable.
+  Computing reachable states of car_sys
+  Time in get_reach_set: 12.650 secs
+p2_bad not reachable.
+  Computing reachable states of car_sys
+  Time in get_reach_set: 0.565 secs
+p3_bad is reachable.
+  Time in file jkhare_C3_pc12.pha: 36.455 secs
+Time in PHAVerLite: 36.455 secs

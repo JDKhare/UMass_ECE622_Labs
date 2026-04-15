@@ -1,0 +1,15 @@
+\begin{thebibliography}{1}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Frehse(2008)]{Frehse2008STTT}
+Goran Frehse.
+\newblock {PHAVer}: Algorithmic verification of hybrid systems past {HyTech}.
+\newblock \emph{International Journal on Software Tools for Technology
+  Transfer}, 10\penalty0 (3):\penalty0 263--279, 2008.
+\newblock \doi{10.1007/s10009-007-0062-3}.
+
+\end{thebibliography}

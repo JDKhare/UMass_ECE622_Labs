@@ -5,8 +5,10 @@ This folder mirrors the Lab~2 `latex-build` workflow, reformatted for **Lab~3: H
 ## Contents
 
 - `Lab3Report.tex` — report skeleton aligned with Parts A--C of the lab handout
-- `figures/` — drop exported plots and screenshots here (or use `report-draft-1/snapshots/`)
+- `figures/` — drop exported plots and screenshots here (or use `report-draft-1/snapshots/`). Part~C $(x,v)$ plot is expected as `figures/c2_car_reachable_x_v.jpg` when building with images.
 - `Makefile` — convenience targets for `latexmk`
+
+The report uses **TikZ** (automata + positioning) for the Part~C hybrid automaton; a standard TeX Live `pgf` install is sufficient.
 
 ## Build
 

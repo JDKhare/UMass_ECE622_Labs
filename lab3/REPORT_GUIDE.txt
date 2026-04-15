@@ -1,0 +1,82 @@
+#latex guide for creating 4 state FSM.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    ->,
+    >=stealth,
+    node distance=3cm,
+    on grid,
+    auto,
+    every state/.style={draw, circle, minimum size=1.2cm}
+]
+
+% States
+\node[state, initial] (S0) {$00$};
+\node[state] (S1) [right=of S0] {$01$};
+\node[state] (S3) [below=of S0] {$11$};
+\node[state] (S2) [right=of S3] {$10$};
+
+% Initial arrow
+\draw[->] ($(S0)+(-1.0,0)$) -- (S0);
+
+% Transitions
+\path
+(S0) edge[bend left] node {A=0,1} (S1)
+(S1) edge[loop above] node {A=0,1} (S1)
+(S2) edge[bend right] node {A=0,1} (S1)
+(S3) edge[bend right] node {A=1} (S2)
+(S3) edge[bend left] node[left] {A=0} (S0);
+
+\end{tikzpicture}
+\caption{State transition graph for \texttt{ex1.v}, only \{0,1\} is reachable from initial}
+\end{figure}
+
+
+# physics equations used for alternative verifcation of reachable states . 
+
+v^2 = u^2 + 2as
+S = ut + 1/2(at^2)
+v = u+at
+
+Also write the differential equations represented by pc. Keep it brief. 
+
+# Lecture Slides reference
+path: src/module3_hybrid_timed.pdf/
+description: Use slide 92, 93, 94 to understand the formal lecture slide for reference of another bouncing ball example (previous experiment on PhaverLite)
+I want u to verify the use of differential equations (the Newton dot method over the variable to describe differentiation)
+
+
+# A.2 Table (copied from google doc):
+Partition Constraint PC 
+Condition reachable? 
+Num Locations reached
+CPU Time (sec) 
+0.5
+yes
+33
+0.03s
+0.2
+yes
+71
+0.077s
+0.1
+yes
+152
+0.171s
+0.05
+no
+327
+0.439s
+0.01
+no
+2671
+8.814s
+0.005
+no
+5373
+44.513s
+
+
+
+
