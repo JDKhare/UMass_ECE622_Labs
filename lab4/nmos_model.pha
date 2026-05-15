@@ -1,0 +1,132 @@
+// PHAVerLite: NMOS Id–Vds reachability (piecewise-linear Id vs Vds, DC Vgs strip)
+//
+// Per run: vgs is fixed near VGS_OP (narrow [VGS_LO_N, VGS_HI_N]); vgs'==0.
+// vds sweeps [0, VDD_N] with vds'==VDS_RAMP; vdsg'==VDS_RAMP (vdsg = vds - vgs, vgs constant).
+// ids' is constant per region: larger in triode (strong Id vs Vds slope), tiny in saturation
+// ("leakage / finite ro" caricature), zero in cutoff.
+//
+// Sweep script replaces VGS_LO_N, VGS_HI_N, and the initially line via patch_nmos_for_vgs.py.
+
+VDD_N:=1.8;
+VTH0_N:=0.424;
+W_MIN_N:=0.12;
+W_MULT_MAX_N:=100;
+W_MAX_N:=12.0;
+L_MIN_N:=0.05;
+L_HI_N:=0.050001;
+VDS_RAMP:=0.12;
+VGS_BAD_HI:=1.801;
+IDS_LEAK_N:=1e-9;
+IDS_MAX_N:=0.15;
+// dIds/dt when vds'==VDS_RAMP (A/s) — steeper in triode, shallow in saturation
+IDS_PRIME_LIN:=0.035;
+IDS_PRIME_SAT:=0.0006;
+// Gate bias strip (sweep replaces VGS_LO_N / VGS_HI_N lines via sed)
+VGS_LO_N:=0.144;
+VGS_HI_N:=0.156;
+// Intersection of gate strip with vgs <= VTH0_N (degenerate at VTH if strip is above-threshold only;
+// keeps loc cutoff non-empty so PHAVerLite does not drop it and invalidate transitions).
+VGS_CUTOFF_LO_N:=0.144;
+VGS_CUTOFF_HI_N:=0.156;
+
+automaton nmos
+
+  contr_var: vgs, vds, w, l, vdsg, ids;
+  synclabs: tau;
+
+  loc cutoff:
+        while vgs >= VGS_CUTOFF_LO_N & vgs <= VGS_CUTOFF_HI_N &
+              vgs >= 0 & vgs <= VTH0_N &
+              vds >= 0 & vds <= VDD_N &
+              w >= W_MIN_N & w <= W_MAX_N &
+              l >= L_MIN_N & l <= L_HI_N &
+              vdsg >= -VDD_N & vdsg <= VDD_N &
+              ids >= 0 & ids <= IDS_LEAK_N
+
+        wait {vgs'==0 & vds'==VDS_RAMP & vdsg'==VDS_RAMP &
+              w'==0 & l'==0 & ids'==0 };
+
+        when vgs >= VTH0_N & vdsg <= -VTH0_N
+          sync tau
+          do{vgs'==vgs & vds'==vds & w'==w & l'==l & vdsg'==vdsg & ids'==ids}
+          goto linear_region;
+
+        when vgs >= VTH0_N & vdsg >= -VTH0_N
+          sync tau
+          do{vgs'==vgs & vds'==vds & w'==w & l'==l & vdsg'==vdsg & ids'==ids}
+          goto saturation_region;
+
+    loc linear_region:
+        while vgs >= VGS_LO_N & vgs <= VGS_HI_N &
+              vgs >= VTH0_N & vgs <= VDD_N &
+              vds >= 0 & vds <= VDD_N &
+              w >= W_MIN_N & w <= W_MAX_N &
+              l >= L_MIN_N & l <= L_HI_N &
+              vdsg <= -VTH0_N &
+              ids >= 0 & ids <= IDS_MAX_N
+
+        wait {vgs'==0 & vds'==VDS_RAMP & vdsg'==VDS_RAMP &
+              w'==0 & l'==0 & ids'==IDS_PRIME_LIN};
+
+        when vdsg >= -VTH0_N
+        sync tau
+        do{vgs'==vgs & vds'==vds & w'==w & l'==l & vdsg'==vdsg & ids'==ids}
+        goto saturation_region;
+
+        when vgs <= VTH0_N
+        sync tau
+        do{vgs'==vgs & vds'==vds & w'==w & l'==l & vdsg'==vdsg & ids'==ids}
+        goto cutoff;
+
+    loc saturation_region:
+        while vgs >= VGS_LO_N & vgs <= VGS_HI_N &
+              vgs >= VTH0_N & vgs <= VDD_N &
+              vds >= 0 & vds <= VDD_N &
+              w >= W_MIN_N & w <= W_MAX_N &
+              l >= L_MIN_N & l <= L_HI_N &
+              vdsg >= -VTH0_N &
+              ids >= 0 & ids <= IDS_MAX_N
+
+        wait {vgs'==0 & vds'==VDS_RAMP & vdsg'==VDS_RAMP &
+              w'==0 & l'==0 & ids'==IDS_PRIME_SAT};
+
+        when vdsg <= -VTH0_N
+        sync tau
+        do{vgs'==vgs & vds'==vds & w'==w & l'==l & vdsg'==vdsg & ids'==ids}
+        goto linear_region;
+
+        when vgs <= VTH0_N
+        sync tau
+        do{vgs'==vgs & vds'==vds & w'==w & l'==l & vdsg'==vdsg & ids'==ids}
+        goto cutoff;
+
+    initially: cutoff & vgs == 0.15 & vds == 0.01 & vdsg == -0.14 &
+               w >= 0.12 & w <= 0.24 & l >= L_MIN_N & l <= L_HI_N &
+               ids >= 0 & ids <= IDS_LEAK_N;
+  end
+
+nmos.add_label(tau);
+pc_vgs:=0.008;
+pc_vds:=0.45;
+pc_w:=0.6;
+pc_l:=0.0000005;
+pc_vdsg:=0.45;
+pc_ids:=0.06;
+nmos.set_refine_constraints((vgs,pc_vgs),(vds,pc_vds),(w,pc_w),(l,pc_l),(vdsg,pc_vdsg),(ids,pc_ids),tau);
+
+reg=nmos.reachable;
+reg.print("out_reachable",2);
+
+inv=nmos.get_invariants;
+inv.print("out_inv",2);
+
+sat_set=nmos.{saturation_region & vgs >= 0};
+sat_reach=nmos.is_reachable(sat_set);
+
+lin_set=nmos.{linear_region & vgs >= 0};
+lin_reach=nmos.is_reachable(lin_set);
+
+invalid_low=nmos.{cutoff & vgs <= -0.001};
+invalid_high=nmos.{saturation_region & vgs >= VGS_BAD_HI};
+invalid_low_reach=nmos.is_reachable(invalid_low);
+invalid_high_reach=nmos.is_reachable(invalid_high);

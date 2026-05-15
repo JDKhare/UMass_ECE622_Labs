@@ -1,0 +1,238 @@
+// PHAVerLite: CMOS inverter fragment (see lab4/_generate_cmos_inverter_pha.py).
+// vgp'==0 tracks Vin-VDD; vdsg'==vout' when Vin'==0. vout': pull-up / pull-down / contention heuristic.
+// patch_inverter_for_vin.py overwrites VIN_*, VGP_*_P, and initially for each run.
+
+VDD:=1.8;
+VTH0_N:=0.424;
+VTH0_P:=-0.424;
+VOUT_RAMP:=0.12;
+VOH:=1.62;
+VOL:=0.18;
+VIN_LO:=1.744;
+VIN_HI:=1.756;
+VGP_LO_P:=-0.056;
+VGP_HI_P:=-0.044;
+VGP_CUTOFF_LO_P:=-0.056;
+VGP_CUTOFF_HI_P:=-0.044;
+
+automaton cmos_inv
+
+  contr_var: vin, vout, vdsg, vgp;
+  synclabs: tau;
+  loc m0:
+        while vin >= VIN_LO & vin <= VIN_HI &
+              vin >= VTH0_N & vin <= VDD &
+              vout >= 0 & vout <= VDD &
+              vdsg <= -VTH0_N &
+              vdsg >= -VDD & vdsg <= VDD &
+              vgp >= -VDD & vgp <= 0 &
+              vgp >= VGP_CUTOFF_LO_P & vgp <= VGP_CUTOFF_HI_P &
+              vgp >= VTH0_P & vgp <= 0 &
+              vout >= 0 & vout <= VDD
+
+        wait {vin'==0 & vgp'==0 & vout'==-VOUT_RAMP & vdsg'==vout'};
+
+        when vdsg >= -VTH0_N
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m3;
+
+        when vgp <= VTH0_P & vdsg >= -VTH0_P
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m1;
+
+        when vgp <= VTH0_P & vdsg <= -VTH0_P
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m2;
+
+  loc m1:
+        while vin >= VIN_LO & vin <= VIN_HI &
+              vin >= VTH0_N & vin <= VDD &
+              vout >= 0 & vout <= VDD &
+              vdsg <= -VTH0_N &
+              vdsg >= -VDD & vdsg <= VDD &
+              vgp >= -VDD & vgp <= 0 &
+              vgp >= VGP_LO_P & vgp <= VGP_HI_P &
+              vgp <= VTH0_P & vgp >= -VDD &
+              vout >= 0 & vout <= VDD &
+              vdsg >= -VTH0_P &
+              vdsg >= -VDD & vdsg <= VDD
+
+        wait {vin'==0 & vgp'==0 & vout'==0 & vdsg'==vout'};
+
+        when vdsg >= -VTH0_N
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m4;
+
+        when vdsg <= -VTH0_P
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m2;
+
+        when vgp >= VTH0_P
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m0;
+
+  loc m2:
+        while vin >= VIN_LO & vin <= VIN_HI &
+              vin >= VTH0_N & vin <= VDD &
+              vout >= 0 & vout <= VDD &
+              vdsg <= -VTH0_N &
+              vdsg >= -VDD & vdsg <= VDD &
+              vgp >= -VDD & vgp <= 0 &
+              vgp >= VGP_LO_P & vgp <= VGP_HI_P &
+              vgp <= VTH0_P & vgp >= -VDD &
+              vout >= 0 & vout <= VDD &
+              vdsg <= -VTH0_P &
+              vdsg >= -VDD & vdsg <= VDD
+
+        wait {vin'==0 & vgp'==0 & vout'==0 & vdsg'==vout'};
+
+        when vdsg >= -VTH0_N
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m5;
+
+        when vdsg >= -VTH0_P
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m1;
+
+        when vgp >= VTH0_P
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m0;
+
+  loc m3:
+        while vin >= VIN_LO & vin <= VIN_HI &
+              vin >= VTH0_N & vin <= VDD &
+              vout >= 0 & vout <= VDD &
+              vdsg >= -VTH0_N &
+              vdsg >= -VDD & vdsg <= VDD &
+              vgp >= -VDD & vgp <= 0 &
+              vgp >= VGP_CUTOFF_LO_P & vgp <= VGP_CUTOFF_HI_P &
+              vgp >= VTH0_P & vgp <= 0 &
+              vout >= 0 & vout <= VDD
+
+        wait {vin'==0 & vgp'==0 & vout'==-VOUT_RAMP & vdsg'==vout'};
+
+        when vdsg <= -VTH0_N
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m0;
+
+        when vgp <= VTH0_P & vdsg >= -VTH0_P
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m4;
+
+        when vgp <= VTH0_P & vdsg <= -VTH0_P
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m5;
+
+  loc m4:
+        while vin >= VIN_LO & vin <= VIN_HI &
+              vin >= VTH0_N & vin <= VDD &
+              vout >= 0 & vout <= VDD &
+              vdsg >= -VTH0_N &
+              vdsg >= -VDD & vdsg <= VDD &
+              vgp >= -VDD & vgp <= 0 &
+              vgp >= VGP_LO_P & vgp <= VGP_HI_P &
+              vgp <= VTH0_P & vgp >= -VDD &
+              vout >= 0 & vout <= VDD &
+              vdsg >= -VTH0_P &
+              vdsg >= -VDD & vdsg <= VDD
+
+        wait {vin'==0 & vgp'==0 & vout'==0 & vdsg'==vout'};
+
+        when vdsg <= -VTH0_N
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m1;
+
+        when vdsg <= -VTH0_P
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m5;
+
+        when vgp >= VTH0_P
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m3;
+
+  loc m5:
+        while vin >= VIN_LO & vin <= VIN_HI &
+              vin >= VTH0_N & vin <= VDD &
+              vout >= 0 & vout <= VDD &
+              vdsg >= -VTH0_N &
+              vdsg >= -VDD & vdsg <= VDD &
+              vgp >= -VDD & vgp <= 0 &
+              vgp >= VGP_LO_P & vgp <= VGP_HI_P &
+              vgp <= VTH0_P & vgp >= -VDD &
+              vout >= 0 & vout <= VDD &
+              vdsg <= -VTH0_P &
+              vdsg >= -VDD & vdsg <= VDD
+
+        wait {vin'==0 & vgp'==0 & vout'==0 & vdsg'==vout'};
+
+        when vdsg <= -VTH0_N
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m2;
+
+        when vdsg >= -VTH0_P
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m4;
+
+        when vgp >= VTH0_P
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m3;
+
+    initially: m0 & vin == 1.75 & vout == 0.2 & vdsg == -1.55 & vgp == -0.05;
+  end
+
+cmos_inv.add_label(tau);
+pc_vin:=0.008;
+pc_vout:=0.45;
+pc_vdsg:=0.45;
+pc_vgp:=0.008;
+cmos_inv.set_refine_constraints((vin,pc_vin),(vout,pc_vout),(vdsg,pc_vdsg),(vgp,pc_vgp),tau);
+
+// --- Reachability (this file: Vin high band) ---
+reach_m0=cmos_inv.{m0 & vout >= 0};
+reach_m0_ok=cmos_inv.is_reachable(reach_m0);
+
+reach_m1=cmos_inv.{m1 & vout >= 0};
+reach_m1_ok=cmos_inv.is_reachable(reach_m1);
+
+reach_m2=cmos_inv.{m2 & vout >= 0};
+reach_m2_ok=cmos_inv.is_reachable(reach_m2);
+
+reach_m3=cmos_inv.{m3 & vout >= 0};
+reach_m3_ok=cmos_inv.is_reachable(reach_m3);
+
+reach_m4=cmos_inv.{m4 & vout >= 0};
+reach_m4_ok=cmos_inv.is_reachable(reach_m4);
+
+reach_m5=cmos_inv.{m5 & vout >= 0};
+reach_m5_ok=cmos_inv.is_reachable(reach_m5);
+
+t_lo_m0=cmos_inv.{m0 & vout <= VOL};
+t_lo_m0_ok=cmos_inv.is_reachable(t_lo_m0);
+t_lo_m1=cmos_inv.{m1 & vout <= VOL};
+t_lo_m1_ok=cmos_inv.is_reachable(t_lo_m1);
+t_lo_m2=cmos_inv.{m2 & vout <= VOL};
+t_lo_m2_ok=cmos_inv.is_reachable(t_lo_m2);
+t_lo_m3=cmos_inv.{m3 & vout <= VOL};
+t_lo_m3_ok=cmos_inv.is_reachable(t_lo_m3);
+t_lo_m4=cmos_inv.{m4 & vout <= VOL};
+t_lo_m4_ok=cmos_inv.is_reachable(t_lo_m4);
+t_lo_m5=cmos_inv.{m5 & vout <= VOL};
+t_lo_m5_ok=cmos_inv.is_reachable(t_lo_m5);

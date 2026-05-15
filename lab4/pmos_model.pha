@@ -1,0 +1,127 @@
+// PHAVerLite: PMOS Id–Vds reachability (piecewise-linear Id vs Vds, DC Vgs strip)
+//
+// Per run: vgs is fixed near VGS_OP (narrow [VGS_LO_P, VGS_HI_P]); vgs'==0.
+// vds sweeps [-VDD_P, 0] with vds'==-VDS_RAMP; vdsg'==-VDS_RAMP (vdsg = vds - vgs, vgs constant).
+// ids' is constant per region: larger in triode, tiny in saturation, zero in cutoff.
+//
+// Sweep script replaces VGS_LO_P, VGS_HI_P, and the initially line via patch_pmos_for_vgs.py.
+
+VDD_P:=1.8;
+VTH0_P:=-0.424;
+W_MIN_P:=0.12;
+W_MULT_MAX_P:=100;
+W_MAX_P:=12.0;
+L_MIN_P:=0.05;
+L_HI_P:=0.050001;
+VDS_RAMP:=0.12;
+VGS_BAD_LO:=-1.801;
+IDS_LEAK_P:=1e-9;
+IDS_MAX_P:=0.15;
+IDS_PRIME_LIN:=0.035;
+IDS_PRIME_SAT:=0.0006;
+VGS_LO_P:=-0.156;
+VGS_HI_P:=-0.144;
+VGS_CUTOFF_LO_P:=-0.156;
+VGS_CUTOFF_HI_P:=-0.144;
+
+automaton pmos
+
+  contr_var: vgs, vds, w, l, vdsg, ids;
+  synclabs: tau;
+
+  loc cutoff:
+        while vgs >= VGS_CUTOFF_LO_P & vgs <= VGS_CUTOFF_HI_P &
+              vgs >= VTH0_P & vgs <= 0 &
+              vds >= -VDD_P & vds <= 0 &
+              w >= W_MIN_P & w <= W_MAX_P &
+              l >= L_MIN_P & l <= L_HI_P &
+              vdsg >= -VDD_P & vdsg <= VDD_P &
+              ids >= 0 & ids <= IDS_LEAK_P
+
+        wait {vgs'==0 & vds'==-VDS_RAMP & vdsg'==-VDS_RAMP &
+              w'==0 & l'==0 & ids'==0 };
+
+        when vgs <= VTH0_P & vdsg >= -VTH0_P
+          sync tau
+          do{vgs'==vgs & vds'==vds & w'==w & l'==l & vdsg'==vdsg & ids'==ids}
+          goto linear_region;
+
+        when vgs <= VTH0_P & vdsg <= -VTH0_P
+          sync tau
+          do{vgs'==vgs & vds'==vds & w'==w & l'==l & vdsg'==vdsg & ids'==ids}
+          goto saturation_region;
+
+    loc linear_region:
+        while vgs >= VGS_LO_P & vgs <= VGS_HI_P &
+              vgs <= VTH0_P & vgs >= -VDD_P &
+              vds >= -VDD_P & vds <= 0 &
+              w >= W_MIN_P & w <= W_MAX_P &
+              l >= L_MIN_P & l <= L_HI_P &
+              vdsg >= -VTH0_P &
+              ids >= 0 & ids <= IDS_MAX_P
+
+        wait {vgs'==0 & vds'==-VDS_RAMP & vdsg'==-VDS_RAMP &
+              w'==0 & l'==0 & ids'==IDS_PRIME_LIN};
+
+        when vdsg <= -VTH0_P
+        sync tau
+        do{vgs'==vgs & vds'==vds & w'==w & l'==l & vdsg'==vdsg & ids'==ids}
+        goto saturation_region;
+
+        when vgs >= VTH0_P
+        sync tau
+        do{vgs'==vgs & vds'==vds & w'==w & l'==l & vdsg'==vdsg & ids'==ids}
+        goto cutoff;
+
+    loc saturation_region:
+        while vgs >= VGS_LO_P & vgs <= VGS_HI_P &
+              vgs <= VTH0_P & vgs >= -VDD_P &
+              vds >= -VDD_P & vds <= 0 &
+              w >= W_MIN_P & w <= W_MAX_P &
+              l >= L_MIN_P & l <= L_HI_P &
+              vdsg <= -VTH0_P &
+              ids >= 0 & ids <= IDS_MAX_P
+
+        wait {vgs'==0 & vds'==-VDS_RAMP & vdsg'==-VDS_RAMP &
+              w'==0 & l'==0 & ids'==IDS_PRIME_SAT};
+
+        when vdsg >= -VTH0_P
+        sync tau
+        do{vgs'==vgs & vds'==vds & w'==w & l'==l & vdsg'==vdsg & ids'==ids}
+        goto linear_region;
+
+        when vgs >= VTH0_P
+        sync tau
+        do{vgs'==vgs & vds'==vds & w'==w & l'==l & vdsg'==vdsg & ids'==ids}
+        goto cutoff;
+
+    initially: cutoff & vgs == -0.15 & vds == -0.01 & vdsg == 0.14 &
+               w >= 0.12 & w <= 0.24 & l >= L_MIN_P & l <= L_HI_P &
+               ids >= 0 & ids <= IDS_LEAK_P;
+  end
+
+pmos.add_label(tau);
+pc_vgs:=0.008;
+pc_vds:=0.45;
+pc_w:=0.6;
+pc_l:=0.0000005;
+pc_vdsg:=0.45;
+pc_ids:=0.06;
+pmos.set_refine_constraints((vgs,pc_vgs),(vds,pc_vds),(w,pc_w),(l,pc_l),(vdsg,pc_vdsg),(ids,pc_ids),tau);
+
+reg=pmos.reachable;
+reg.print("out_reachable",2);
+
+inv=pmos.get_invariants;
+inv.print("out_inv",2);
+
+sat_set=pmos.{saturation_region & vgs <= 0};
+sat_reach=pmos.is_reachable(sat_set);
+
+lin_set=pmos.{linear_region & vgs <= 0};
+lin_reach=pmos.is_reachable(lin_set);
+
+invalid_low=pmos.{cutoff & vgs >= 0.001};
+invalid_high=pmos.{saturation_region & vgs <= VGS_BAD_LO};
+invalid_low_reach=pmos.is_reachable(invalid_low);
+invalid_high_reach=pmos.is_reachable(invalid_high);
