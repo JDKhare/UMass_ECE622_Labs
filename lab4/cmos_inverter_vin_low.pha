@@ -1,0 +1,80 @@
+// PHAVerLite: CMOS inverter fragment (see lab4/_generate_cmos_inverter_pha.py).
+// vgp'==0 tracks Vin-VDD; vdsg'==vout' when Vin'==0. vout': pull-up / pull-down / contention heuristic.
+// patch_inverter_for_vin.py overwrites VIN_*, VGP_*_P, and initially for each run.
+
+VDD:=1.8;
+VTH0_N:=0.424;
+VTH0_P:=-0.424;
+VOUT_RAMP:=0.12;
+VOH:=1.62;
+VOL:=0.18;
+VIN_LO:=0.044;
+VIN_HI:=0.056;
+VGP_LO_P:=-1.756;
+VGP_HI_P:=-1.744;
+VGP_CUTOFF_LO_P:=-0.424;
+VGP_CUTOFF_HI_P:=-0.424;
+
+automaton cmos_inv
+
+  contr_var: vin, vout, vdsg, vgp;
+  synclabs: tau;
+  loc m0:
+        while vin >= VIN_LO & vin <= VIN_HI &
+              vin >= 0 & vin <= VTH0_N &
+              vout >= 0 & vout <= VDD &
+              vdsg >= -VDD & vdsg <= VDD &
+              vgp >= -VDD & vgp <= 0 &
+              vgp >= VGP_LO_P & vgp <= VGP_HI_P &
+              vgp <= VTH0_P & vgp >= -VDD &
+              vout >= 0 & vout <= VDD &
+              vdsg >= -VTH0_P &
+              vdsg >= -VDD & vdsg <= VDD
+
+        wait {vin'==0 & vgp'==0 & vout'==VOUT_RAMP & vdsg'==vout'};
+
+        when vdsg <= -VTH0_P
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m1;
+
+  loc m1:
+        while vin >= VIN_LO & vin <= VIN_HI &
+              vin >= 0 & vin <= VTH0_N &
+              vout >= 0 & vout <= VDD &
+              vdsg >= -VDD & vdsg <= VDD &
+              vgp >= -VDD & vgp <= 0 &
+              vgp >= VGP_LO_P & vgp <= VGP_HI_P &
+              vgp <= VTH0_P & vgp >= -VDD &
+              vout >= 0 & vout <= VDD &
+              vdsg <= -VTH0_P &
+              vdsg >= -VDD & vdsg <= VDD
+
+        wait {vin'==0 & vgp'==0 & vout'==VOUT_RAMP & vdsg'==vout'};
+
+        when vdsg >= -VTH0_P
+        sync tau
+        do{vin'==vin & vout'==vout & vdsg'==vdsg & vgp'==vgp}
+        goto m0;
+
+    initially: m0 & vin == 0.05 & vout == 0.9 & vdsg == 0.85 & vgp == -1.75;
+  end
+
+cmos_inv.add_label(tau);
+pc_vin:=0.008;
+pc_vout:=0.45;
+pc_vdsg:=0.45;
+pc_vgp:=0.008;
+cmos_inv.set_refine_constraints((vin,pc_vin),(vout,pc_vout),(vdsg,pc_vdsg),(vgp,pc_vgp),tau);
+
+// --- Reachability (this file: Vin low band; joint n_cut+p_cut omitted globally) ---
+reach_m0=cmos_inv.{m0 & vout >= 0};
+reach_m0_ok=cmos_inv.is_reachable(reach_m0);
+
+reach_m1=cmos_inv.{m1 & vout >= 0};
+reach_m1_ok=cmos_inv.is_reachable(reach_m1);
+
+t_hi_m0=cmos_inv.{m0 & vout >= VOH};
+t_hi_m0_ok=cmos_inv.is_reachable(t_hi_m0);
+t_hi_m1=cmos_inv.{m1 & vout >= VOH};
+t_hi_m1_ok=cmos_inv.is_reachable(t_hi_m1);
