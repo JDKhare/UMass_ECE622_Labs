@@ -1,0 +1,36 @@
+// ----------------------------------------------------------
+// Lab 3 Problem C.4: 0-60 mph timing via reachability bracketing
+// 60 mph ~= 26.8 m/s
+// ----------------------------------------------------------
+
+automaton car_c4
+
+        // x = position (m), v = velocity (m/s), t = time (s)
+        contr_var: x,v,t;
+        synclabs: mode_switch;
+
+        // Acceleration phase from rest.
+        // Upper bounds keep exploration finite and runtime stable.
+        loc Accel: while v >= 0 & v <= 35 & x <= 450 & t <= 8.5 wait {x' == v & v' == 3.5 & t' == 1};
+
+        initially: Accel & x == 0 & v == 0 & t == 0;
+end
+
+car_c4.add_label(tau);
+pc:=3.0;
+car_c4.set_refine_constraints((x,pc),(v,pc),(t,pc),tau);
+
+// Optional outputs for inspection/plotting
+reg=car_c4.reachable;
+reg.print("out_reachable_c4",2);
+
+inv=car_c4.get_invariants;
+inv.print("out_inv_c4",2);
+
+// Bracketing queries for 0-60 mph timing:
+// Choose T=7.6 and T+0.1=7.7.
+q_before=car_c4.{Accel & t <= 7.6 & v >= 26.8};
+r_before=car_c4.is_reachable(q_before);
+
+q_after=car_c4.{Accel & t <= 7.7 & v >= 26.8};
+r_after=car_c4.is_reachable(q_after);

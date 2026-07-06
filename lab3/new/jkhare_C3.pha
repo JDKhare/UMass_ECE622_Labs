@@ -1,0 +1,56 @@
+// ----------------------------------------------------------
+// Lab 3 Problem C (C2/C3): Car model with nondeterministic
+// red-light encounter window at x in [250, 300].
+// ----------------------------------------------------------
+
+automaton car_sys
+
+        // x = position (m), v = velocity (m/s)
+        contr_var: x,v;
+        synclabs: mode_switch;
+
+        // ACCEL: start from rest and accelerate.
+        // Invariant x <= 300 forces braking decision by the end of the red window.
+        loc Accel: while v >= 0 & x <= 300 wait {x' == v & v' == 3.5};
+              when x >= 250 sync mode_switch do{x'==x & v'==v} goto Brake;
+
+        // BRAKE: constant deceleration until full stop.
+        loc Brake: while v >= 0 & x <= 550 wait {x' == v & v' == -5.5};
+              when v <= 0 sync mode_switch do{x'==x & v'==0} goto Stop;
+
+        // STOP: terminal standstill.
+        loc Stop: while v == 0 & x <= 550 wait {x' == 0 & v' == 0};
+
+        initially: Accel & x == 0 & v == 0;
+end
+
+// ----------------------------------------------------------
+// Partitioning setup (required pc = 3.0)
+// ----------------------------------------------------------
+car_sys.add_label(tau);
+pc:=3.0;
+car_sys.set_refine_constraints((x,pc),(v,pc),tau);
+
+// ----------------------------------------------------------
+// Save data for graphing (C.2 workflow)
+// ----------------------------------------------------------
+reg=car_sys.reachable;
+reg.print("out_reachable",2);
+
+inv=car_sys.get_invariants;
+inv.print("out_inv",2);
+
+// ----------------------------------------------------------
+// C.3 reachability checks (bad-state form)
+// ----------------------------------------------------------
+// P1 bad state: crossing second intersection while still moving.
+p1_bad=car_sys.{Brake & x >= 500 & v >= 0.001};
+p1_bad_reach=car_sys.is_reachable(p1_bad);
+
+// P2 bad state: while braking, speed exceeds 46.5 m/s.
+p2_bad=car_sys.{Brake & v >= 46.5};
+p2_bad_reach=car_sys.is_reachable(p2_bad);
+
+// P3 bad state: while braking, speed exceeds 40.0 m/s.
+p3_bad=car_sys.{Brake & v >= 40.0};
+p3_bad_reach=car_sys.is_reachable(p3_bad);

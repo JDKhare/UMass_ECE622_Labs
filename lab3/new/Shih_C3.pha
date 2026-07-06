@@ -1,0 +1,26 @@
+automaton car
+    contr_var:x,v;
+    synclabs:a;
+
+    loc acclerating: while x<=300 & v>=0 wait{x'==v & v'==3.5};
+                    when x>=250 sync a do {x'==x& v'==v} goto braking;
+    loc braking: while x<=500 & v>=0 wait{x'==v &v'==-5.5}
+
+    initially: acclerating & x==0 & v==0;
+
+end
+
+car.add_label(tau);
+
+pc:=1.2;
+
+// set up partitioning of state space for the two variables x and y
+car.set_partition_constraints((x,pc),(v,pc),tau);
+//reg = car.reachable;
+//reg.print("heatingsystem",2);  
+property1 = car.{$ & x>= 500 & v >0};
+property2 = car.{$ & v >= 46.5 & v'==-5.5};
+property3 = car.{$ & v >= 40 & v'==40};
+check = car.is_reachable(property1);
+check = car.is_reachable(property2);
+check = car.is_reachable(property3);

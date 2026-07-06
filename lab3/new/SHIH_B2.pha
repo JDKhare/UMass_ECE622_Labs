@@ -1,0 +1,26 @@
+//PartB
+automaton heatingsystem
+    contr_var:t,x;
+    synclabs:a;
+
+    loc cool: while x>=18 & t>=0 & t<=10 wait {x'==-0.1*x & t'==1};
+            when x<=19 sync a do {x'==x & t'==t} goto heat;
+
+    loc heat: while x<=22 & t>=0 & t<=10 wait{x'==5-0.1*x & t'==1};
+            when x>=21 sync a do {x'==x & t'==t} goto cool;
+
+    initially: cool & x==22 & t==0;
+end
+
+    // don't need to change this. "tau" is a label for transitions between partitions.
+heatingsystem.add_label(tau);
+
+// controls the size of the partitions (i.e. the level of abstraction)
+pc:=1.2;
+
+// set up partitioning of state space for the two variables x and y
+heatingsystem.set_partition_constraints((x,pc),(t,pc),tau);
+reg = heatingsystem.reachable;
+reg.print("heatingsystem",2);  
+bad = heatingsystem.{$ & t == 98/100 & x >20};
+check = heatingsystem.is_reachable(bad);

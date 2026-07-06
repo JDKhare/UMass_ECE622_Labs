@@ -1,0 +1,82 @@
+// Hybrid System Example: Bouncing Ball
+
+g:=1;     // constant for acceleration from gravity
+
+automaton bball
+   contr_var: x, v;    // x is position, v is velocity
+   synclabs: jump;
+   loc falling: while 0<=x & x<=3 & -3<=v & v<=3 wait {x'==v & v'==-g}
+                when x==0 & v<0 sync jump do {v'==-v*0.5 & x'==x} goto falling;
+   initially: falling & x==2 & v==0;
+end
+
+
+/*
+//A.3
+automaton bball
+   contr_var: x, v, n;    // x is position, v is velocity
+   synclabs: jump;
+   loc falling: while 0<=x & x<=3 & -3<=v & v<=3 & n<=10 wait {x'==v & v'==-g & n'==0}
+                when x==0 & v<0 sync jump do {v'==-v*0.5 & x'==x & n'==n+1} goto falling;
+   initially: falling & x==2 & v==0 & n==0;
+end
+*/
+/*
+//A.1
+// --------------------- Start of Analysis -------------------------------
+bball.add_label(tau);
+pc:=0.05;                       // define partition constraint
+bball.set_partition_constraints((x,pc),(v,pc),tau); 
+
+reg=bball.reachable;            // reached part of state space
+reg.print("out_reach_05",2);       // output as list of vertices
+
+inv=bball.get_invariants;       // grid of partitions explored
+inv.print("out_inv_05",2);
+
+// add commands here to check reachable states
+*/
+
+// --------------------- Start of Analysis -------------------------------
+//A.2
+//pc:=0.05   ;                    // define partition constraint
+//bball.set_partition_constraints((x,pc),(v,pc),tau); 
+
+//reg=bball.reachable;            // reached part of state space
+//reg.print("out_reach_005",2);       // output as list of vertices
+
+//inv=bball.get_invariants;       // grid of partitions explored
+//inv.print("out_inv_005",2);
+
+// add commands here to check reachable states
+//A.2
+
+
+bball.add_label(tau);
+pc:=0.005;
+bball.set_partition_constraints((x,pc),(v,pc),tau);
+target = bball.{$ & x==55/100 & v==0};
+check = bball.is_reachable(target);
+//reg=bball.reachable;  
+//reg.print("out_reach_05",2);  
+
+
+//A.3
+
+/*
+
+bball.add_label(tau);
+pc:=0.05;                       // define partition constraint
+bball.set_partition_constraints((x,pc),(v,pc),tau);
+n1 = bball.{$ & x == 15/100 & v == 0 & n==1};
+n2 = bball.{$ & x == 15/100 & v == 0 & n==2};
+n3 = bball.{$ & x == 15/100 & v == 0 & n==3};
+n4 = bball.{$ & x == 15/100 & v == 0 & n==4};
+
+check = bball.is_reachable(n1);
+check = bball.is_reachable(n2);
+check = bball.is_reachable(n3);
+check = bball.is_reachable(n4);
+
+*/
+
